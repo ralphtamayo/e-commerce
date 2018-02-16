@@ -1,0 +1,24 @@
+@import 'sass/reset';
+@import 'sass/colors';
+@import 'sass/fonts';
+@import 'sass/buttons';
+@import 'sass/forms';
+
+body {
+	background: #363636;
+}
+
+.login-container {
+	background: #FFFFFF;
+	width: 400px;
+	margin: 50px auto;
+	padding-top: 20px;
+
+	& > .header {
+		border-left: 4px solid #FF5055;
+		padding: 10px 25px;
+	}
+	& > .body {
+		padding: 20px;
+	}
+}
