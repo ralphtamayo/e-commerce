@@ -15,7 +15,7 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
-        '719971e375036615a0685b6fb054583d' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
+        'a878cd8fe88a8024374fe01b67684a2e' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -75,10 +75,6 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         'C' => 
         array (
             'Composer\\CaBundle\\' => 18,
-        ),
-        'A' => 
-        array (
-            'AppBundle\\' => 10,
         ),
     );
 
@@ -215,10 +211,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
-        'AppBundle\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/AppBundle',
-        ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/../..' . '/src',
     );
 
     public static $prefixesPsr0 = array (
@@ -287,6 +283,7 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit4187874367ae80601cb5da67908e84c8::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit4187874367ae80601cb5da67908e84c8::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit4187874367ae80601cb5da67908e84c8::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit4187874367ae80601cb5da67908e84c8::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit4187874367ae80601cb5da67908e84c8::$classMap;
 
