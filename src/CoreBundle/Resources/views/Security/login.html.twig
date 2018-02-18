@@ -5,20 +5,34 @@
 		<div class="header">
 			<h2>Login</h2>
 		</div>
-		<div class="body">
+		<form class="body" action="{{ path("fos_user_security_check") }}" method="post">
 			<div class="row">
+				{% if error %}
+					<div class="col-md-12">
+						<div class="alert alert-danger" role="alert">
+							<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						</div>
+					</div>
+				{% endif %}
+				{% if csrf_token %}
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+				{% endif %}
 				<div class="col-md-12 form-group">
 					<label>Username</label>
-					<input type="text" class="form-box" placeholder="Username"/>
+					<input type="text" class="form-box" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Username" />
 				</div>
 				<div class="col-md-12 form-group">
-					<label>Password</label>
-					<input type="password" class="form-box" placeholder="Password"/>
+					<label for="password">Password</label>
+					<input type="password" class="form-box" id="password" name="_password" required="required" placeholder="Password"/>
 				</div>
 				<div class="col-md-12 form-group">
-					<button type="button" class="btn btn-block btn-default">Login</button>
+					<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+					<label for="remember_me">Remember me</label>
+				</div>
+				<div class="col-md-12 form-group">
+					<button type="submit" class="btn btn-block btn-default">Login</button>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
-{% endblock %}
+{% endblock body %}

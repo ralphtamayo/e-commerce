@@ -1,0 +1,20 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="login-container">
+		<div class="header">
+			<h2>Register</h2>
+		</div>
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+            {{ form_widget(form) }}
+            <div>
+                <input type="submit" value="{{ 'registration.submit'|trans }}" />
+            </div>
+        {{ form_end(form) }}
+		{# <form class="body" action="{{ path("fos_user_security_check") }}" method="post">
+			<div class="row">
+
+            </div>
+        </form> #}
+    </div>
+{% endblock body %}
