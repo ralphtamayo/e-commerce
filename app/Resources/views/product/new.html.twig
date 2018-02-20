@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product creation</h1>
+
+    {{ form_start(form) }}
+        <div class="form-group">
+			{{ form_label(form.name) }}
+			{{ form_widget(form.name) }}
+			{{ form_errors(form.name) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.description) }}
+			{{ form_widget(form.description) }}
+			{{ form_errors(form.description) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.price) }}
+			{{ form_widget(form.price) }}
+			{{ form_errors(form.price) }}
+		</div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    {{ form_end(form) }}
+	<a class="btn btn-secondary"  href="{{ path('product_index') }}">Back to the list</a>]
+{% endblock %}
