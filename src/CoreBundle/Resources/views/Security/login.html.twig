@@ -30,7 +30,11 @@
 					<label for="remember_me">Remember me</label>
 				</div>
 				<div class="col-md-12 form-group">
-					<button type="submit" class="btn btn-block btn-default">Login</button>
+					<button type="submit" class="btn btn-block btn-primary">Login</button>
+					<small class="m-t-sm">
+						Don't have an account yet?
+						<a href="{{ path('fos_user_registration_register') }}">Register</a>
+					</small>
 				</div>
 			</div>
 		</form>

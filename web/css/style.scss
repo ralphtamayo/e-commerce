@@ -1,11 +1,18 @@
 @import 'sass/reset';
 @import 'sass/colors';
+@import 'sass/helpers';
 @import 'sass/fonts';
 @import 'sass/buttons';
 @import 'sass/forms';
 
 body {
 	background: #363636;
+}
+
+a {
+	&:hover {
+		color: inherit;
+	}
 }
 
 .login-container {
@@ -15,7 +22,7 @@ body {
 	padding-top: 20px;
 
 	& > .header {
-		border-left: 4px solid #FF5055;
+		border-left: 4px solid $blue;
 		padding: 10px 25px;
 	}
 	& > .body {

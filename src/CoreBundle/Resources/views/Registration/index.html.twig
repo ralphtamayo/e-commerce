@@ -1,34 +1,37 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <div class="login-container">
+	<div class="login-container">
 		<div class="header">
 			<h2>Register</h2>
 		</div>
-        {{ form_start(form, {'attr': {'class': 'container-fluid'}}) }}
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    {{ form_row(form.email, {'attr': {'class': 'form-box'}}) }}
-                </div>
-                <div class="col-md-12 form-group">
-                    {{ form_row(form.username, {'attr': {'class': 'form-box'}}) }}
-                </div>
-                <div class="col-md-12 form-group">
-                    {{ form_row(form.firstName, {'attr': {'class': 'form-box'}}) }}
-                </div>
-                <div class="col-md-12 form-group">
-                    {{ form_row(form.lastName, {'attr': {'class': 'form-box'}}) }}
-                </div>
-                <div class="col-md-12 form-group">
-                    {{ form_row(form.plainPassword.first, {'attr': {'class': 'form-box'}}) }}
-                </div>
-                <div class="col-md-12 form-group">
-                    {{ form_row(form.plainPassword.second, {'attr': {'class': 'form-box'}}) }}
-                </div>
-                <div class="col-md-12 form-group">
-                    <input type="submit" class="btn btn-block btn-default" value="Register" />
-                </div>
-            </div>
-        {{ form_end(form) }}
-    </div>
+		{{ form_start(form, {'attr': {'class': 'container-fluid'}}) }}
+			<div class="row">
+				<div class="col-md-12 form-group">
+					{{ form_row(form.email, {'attr': {'class': 'form-box'}}) }}
+				</div>
+				<div class="col-md-12 form-group">
+					{{ form_row(form.username, {'attr': {'class': 'form-box'}}) }}
+				</div>
+				<div class="col-md-12 form-group">
+					{{ form_row(form.firstName, {'attr': {'class': 'form-box'}}) }}
+				</div>
+				<div class="col-md-12 form-group">
+					{{ form_row(form.lastName, {'attr': {'class': 'form-box'}}) }}
+				</div>
+				<div class="col-md-12 form-group">
+					{{ form_row(form.plainPassword.first, {'attr': {'class': 'form-box'}}) }}
+				</div>
+				<div class="col-md-12 form-group">
+					{{ form_row(form.plainPassword.second, {'attr': {'class': 'form-box'}}) }}
+				</div>
+				<div class="col-md-12 form-group">
+					<input type="submit" class="btn btn-block btn-primary" value="Register" />
+				</div>
+				<div class="col-md-12 form-group">
+					<a href="{{ path('fos_user_security_login') }}" class="btn btn-block btn-default">Back</a>
+				</div>
+			</div>
+		{{ form_end(form) }}
+	</div>
 {% endblock body %}

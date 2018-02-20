@@ -1,6 +1,10 @@
 .btn {
     height: 40px;
     color: #FFFFFF;
+
+    &:hover {
+        color: #FFFFFF;
+    }
 }
 
 .btn-block {
@@ -12,5 +16,13 @@
 
     &:hover {
         background: $red-dark;
+    }
+}
+
+.btn-primary {
+    background: $blue;
+
+    &:hover {
+        background: $blue-dark;
     }
 }
