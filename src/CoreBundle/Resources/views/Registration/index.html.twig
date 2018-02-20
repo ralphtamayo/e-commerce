@@ -5,16 +5,30 @@
 		<div class="header">
 			<h2>Register</h2>
 		</div>
-        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-            {{ form_widget(form) }}
-            <div>
-                <input type="submit" value="{{ 'registration.submit'|trans }}" />
+        {{ form_start(form, {'attr': {'class': 'container-fluid'}}) }}
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    {{ form_row(form.email, {'attr': {'class': 'form-box'}}) }}
+                </div>
+                <div class="col-md-12 form-group">
+                    {{ form_row(form.username, {'attr': {'class': 'form-box'}}) }}
+                </div>
+                <div class="col-md-12 form-group">
+                    {{ form_row(form.firstName, {'attr': {'class': 'form-box'}}) }}
+                </div>
+                <div class="col-md-12 form-group">
+                    {{ form_row(form.lastName, {'attr': {'class': 'form-box'}}) }}
+                </div>
+                <div class="col-md-12 form-group">
+                    {{ form_row(form.plainPassword.first, {'attr': {'class': 'form-box'}}) }}
+                </div>
+                <div class="col-md-12 form-group">
+                    {{ form_row(form.plainPassword.second, {'attr': {'class': 'form-box'}}) }}
+                </div>
+                <div class="col-md-12 form-group">
+                    <input type="submit" class="btn btn-block btn-default" value="Register" />
+                </div>
             </div>
         {{ form_end(form) }}
-		{# <form class="body" action="{{ path("fos_user_security_check") }}" method="post">
-			<div class="row">
-
-            </div>
-        </form> #}
     </div>
 {% endblock body %}
