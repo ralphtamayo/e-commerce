@@ -1,0 +1,12 @@
+user:
+    username:
+        regex: 'Only alphanumeric characters are allowed.'
+    firstName:
+        blank: 'Please enter your first name.'
+        regex: 'Special characters are not allowed.'
+    lastName:
+        blank: 'Please enter your last name.'
+        regex: 'Special characters are not allowed.'
+    password:
+        notMatch: 'The password fields must match.'
+        short: 'The password is too short (minimum 8 characters).'

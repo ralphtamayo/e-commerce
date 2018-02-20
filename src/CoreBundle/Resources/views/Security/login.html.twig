@@ -1,0 +1,42 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+	<div class="login-container">
+		<div class="header">
+			<h2>Login</h2>
+		</div>
+		<form class="body" action="{{ path("fos_user_security_check") }}" method="post">
+			<div class="row">
+				{% if error %}
+					<div class="col-md-12">
+						<div class="alert alert-danger" role="alert">
+							<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						</div>
+					</div>
+				{% endif %}
+				{% if csrf_token %}
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+				{% endif %}
+				<div class="col-md-12 form-group">
+					<label>Username</label>
+					<input type="text" class="form-box" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Username" />
+				</div>
+				<div class="col-md-12 form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-box" id="password" name="_password" required="required" placeholder="Password"/>
+				</div>
+				<div class="col-md-12 form-group">
+					<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+					<label for="remember_me">Remember me</label>
+				</div>
+				<div class="col-md-12 form-group">
+					<button type="submit" class="btn btn-block btn-primary">Login</button>
+					<small class="m-t-sm">
+						Don't have an account yet?
+						<a href="{{ path('fos_user_registration_register') }}">Register</a>
+					</small>
+				</div>
+			</div>
+		</form>
+	</div>
+{% endblock body %}

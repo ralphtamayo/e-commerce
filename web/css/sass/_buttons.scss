@@ -1,0 +1,28 @@
+.btn {
+    height: 40px;
+    color: #FFFFFF;
+
+    &:hover {
+        color: #FFFFFF;
+    }
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-default {
+    background: $red;
+
+    &:hover {
+        background: $red-dark;
+    }
+}
+
+.btn-primary {
+    background: $blue;
+
+    &:hover {
+        background: $blue-dark;
+    }
+}
