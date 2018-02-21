@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -36,6 +38,18 @@ class RegistrationFormType extends AbstractType
 				'required' => true,
 				'attr' => array(
 					'placeholder' => 'Last name',
+				),
+			))
+			->add('address', TextAreaType::class, array(
+				'required' => true,
+				'attr' => array(
+					'placeholder' => 'Address',
+				),
+			))
+			->add('contactDetails', TextType::class, array(
+				'required' => true,
+				'attr' => array(
+					'placeholder' => 'Contact Details',
 				),
 			))
 			->add('plainPassword', RepeatedType::class, array(
