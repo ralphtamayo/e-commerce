@@ -1,0 +1,3 @@
+_finance:
+    resource: "@InventoryBundle/Controller"
+    type:     annotation

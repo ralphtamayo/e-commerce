@@ -3,6 +3,15 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
+ul {
+  padding: 0;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+}
+
 .p-xs {
   padding: 5px;
 }
@@ -303,6 +312,14 @@ h1, h2, h3, h4, h5, h6, p {
   text-align: left;
 }
 
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
 body {
   color: #636d77;
   font-family: 'Roboto', sans-serif;
@@ -350,8 +367,53 @@ label {
   width: 100%;
 }
 
+.r-panel {
+  background: #FFFFFF;
+}
+
+.r-panel .r-panel-header {
+  border-bottom: 1px solid #eaeaea;
+  text-align: center;
+}
+
+.r-panel .r-panel-body {
+  text-align: center;
+}
+
+.product-list .product {
+  background: #FFFFFF;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+}
+
+.product-list .product .product-picture {
+  border-bottom: 1px solid #ddd;
+  height: 250px;
+  overflow: hidden;
+}
+
+.product-list .product .product-picture img {
+  box-sizing: border-box;
+  height: 250px;
+}
+
+.product-list .product .product-description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+
+.product-list .product .product-action {
+  text-align: right;
+}
+
 body {
-  background: #363636;
+  background: #E9EBEE;
+}
+
+body .navbar {
+  background: #FFFFFF;
 }
 
 a:hover {
@@ -372,5 +434,9 @@ a:hover {
 
 .login-container > .body {
   padding: 20px;
+}
+
+.content {
+  padding: 25px;
 }
 /*# sourceMappingURL=style.css.map */

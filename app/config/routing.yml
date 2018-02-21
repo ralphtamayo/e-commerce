@@ -1,6 +1,5 @@
 inventory:
-    resource: "@InventoryBundle/Controller/"
-    type:     annotation
+    resource: "@InventoryBundle/Resources/config/routing.yml"
     prefix:   /
 
 core:

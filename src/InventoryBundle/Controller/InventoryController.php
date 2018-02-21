@@ -5,7 +5,9 @@ namespace InventoryBundle\Controller;
 use InventoryBundle\Entity\Inventory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
@@ -16,10 +18,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class InventoryController extends Controller
 {
     /**
-     * Creates a new inventory entity.
-     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new/{id}", name="inventory_new")
+	 * @Template("@Inventory/inventory/new.html.twig")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction(Request $request, $id)
     {
@@ -47,9 +49,9 @@ class InventoryController extends Controller
             return $this->redirectToRoute('product_show', array('id' => $product->getId()));
         }
 
-        return $this->render('inventory/new.html.twig', array(
+        return array(
             'product' => $product,
             'form' => $form->createView(),
-        ));
+		);
     }
 }
