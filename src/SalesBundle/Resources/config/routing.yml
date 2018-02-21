@@ -1,0 +1,3 @@
+_sales:
+    resource: "@SalesBundle/Controller"
+    type:     annotation

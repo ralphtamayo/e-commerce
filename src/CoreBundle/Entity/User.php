@@ -1,24 +1,25 @@
 <?php
 namespace CoreBundle\Entity;
 
+use SalesBundle\Entity\Cart;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user")
+ * @ORM\Table(name="core_user")
  */
 class User extends BaseUser
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
 
-    /**
+	/**
 	 * @ORM\Column(type="string", nullable=false)
 	 * @Assert\NotBlank(message="user.firstName.blank")
 	 * @Assert\Regex(pattern="/^[\p{L}'][ \p{L}'-]*[\p{L}]$/u", message="user.firstName.regex")
@@ -44,14 +45,14 @@ class User extends BaseUser
 	 */
 	private $contactDetails;
 
-    public function getId(): ?string
+	/**
+	 * @ORM\OneToOne(targetEntity="SalesBundle\Entity\Cart", mappedBy="user")
+	 */
+	private $cart;
+
+	public function getId(): ?string
 	{
 		return $this->id;
-	}
-
-	public function getFirstName(): ?string
-	{
-		return $this->firstName;
 	}
 
 	public function setFirstName(?string $firstName): self
@@ -61,9 +62,9 @@ class User extends BaseUser
 		return $this;
 	}
 
-	public function getLastName(): ?string
+	public function getFirstName(): ?string
 	{
-		return $this->lastName;
+		return $this->firstName;
 	}
 
 	public function setLastName(?string $lastName): self
@@ -73,51 +74,44 @@ class User extends BaseUser
 		return $this;
 	}
 
-    /**
-     * Set address
-     *
-     * @param string $address
-     *
-     * @return User
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
+	public function getLastName(): ?string
+	{
+		return $this->lastName;
+	}
 
-        return $this;
-    }
+	public function setAddress(?string $address): self
+	{
+		$this->address = $address;
 
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
+		return $this;
+	}
 
-    /**
-     * Set contactDetails
-     *
-     * @param string $contactDetails
-     *
-     * @return User
-     */
-    public function setContactDetails($contactDetails)
-    {
-        $this->contactDetails = $contactDetails;
+	public function getAddress(): ?string
+	{
+		return $this->address;
+	}
 
-        return $this;
-    }
+	public function setContactDetails(?string $contactDetails): self
+	{
+		$this->contactDetails = $contactDetails;
 
-    /**
-     * Get contactDetails
-     *
-     * @return string
-     */
-    public function getContactDetails()
-    {
-        return $this->contactDetails;
-    }
+		return $this;
+	}
+
+	public function getContactDetails(): ?string
+	{
+		return $this->contactDetails;
+	}
+
+	public function setCart(?Cart $cart = null): self
+	{
+		$this->cart = $cart;
+
+		return $this;
+	}
+
+	public function getCart(): ?Cart
+	{
+		return $this->cart;
+	}
 }
