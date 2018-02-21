@@ -9,34 +9,21 @@
 
 			<div class="r-panel-body container-fluid">
 				<ul class="row product-list m-t-md">
-					<div class="col-xs-2 col-md-3">
-						<div class="product">
-							<h5 class="p-sm">Rose</h5>
-							<hr>
-							<div class="product-details p-sm">
-								<p>A woody perennial flowering plant of the genus Rosa, in the family Rosaceae, or the flower it bears.</p>
-								<div class="product-action p-t-md">
-									<h6 class="m-t-sm m-b-sm float-left">Price: P200</h6>
-									<button type="button" class="btn btn-primary">Add to cart</button>
+					{% for product in products %}
+						<div class="col-xs-2 col-md-3">
+							<div class="product">
+								<h5 class="p-sm">{{ product.name }}</h5>
+								<hr>
+								<div class="product-details p-sm">
+									<p class="product-description">{{ product.description }}</p>
+									<div class="product-action p-t-md">
+										<h6 class="m-t-sm m-b-sm float-left">Price: {{ product.price }}</h6>
+										<button type="button" class="btn btn-primary">Add to cart</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-xs-2 col-md-3">
-						<div class="product">
-
-						</div>
-					</div>
-					<div class="col-xs-2 col-md-3">
-						<div class="product">
-
-						</div>
-					</div>
-					<div class="col-xs-2 col-md-3">
-						<div class="product">
-
-						</div>
-					</div>
+					{% endfor %}
 				</ul>
 				{% if is_granted('ROLE_ADMIN') %}
 					<a class="btn btn-primary" href="{{ path('product_new') }}">Create a new product</a>

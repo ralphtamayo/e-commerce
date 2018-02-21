@@ -397,6 +397,13 @@ label {
   height: 250px;
 }
 
+.product-list .product .product-description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+
 .product-list .product .product-action {
   text-align: right;
 }

@@ -28,6 +28,13 @@
             }
         }
 
+        .product-description {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 3;
+        }
+
         .product-action {
             text-align: right;
         }
