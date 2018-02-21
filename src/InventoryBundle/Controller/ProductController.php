@@ -60,26 +60,26 @@ class ProductController extends Controller
 	}
 
 	/**
-	 * Finds and displays a product entity.
-	 * @Security("has_role('ROLE_ADMIN')")
 	 * @Route("/{id}", name="product_show")
+	 * @Template("@Inventory/product/show.html.twig")
 	 * @Method("GET")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function showAction(Product $product)
 	{
-		$deleteForm = $this->createDeleteForm($product);
+		$form = $this->createDeleteForm($product);
 
-		return $this->render('product/show.html.twig', array(
+		return array(
 			'product' => $product,
-			'delete_form' => $deleteForm->createView(),
-		));
+			'delete_form' => $form->createView(),
+		);
 	}
 
 	/**
-	 * Displays a form to edit an existing product entity.
-	 * @Security("has_role('ROLE_ADMIN')")
 	 * @Route("/{id}/edit", name="product_edit")
+	 * @Template("@Inventory/product/edit.html.twig")
 	 * @Method({"GET", "POST"})
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function editAction(Request $request, Product $product)
 	{
@@ -93,15 +93,14 @@ class ProductController extends Controller
 			return $this->redirectToRoute('product_show', array('id' => $product->getId()));
 		}
 
-		return $this->render('product/edit.html.twig', array(
+		return array(
 			'product' => $product,
 			'edit_form' => $editForm->createView(),
 			'delete_form' => $deleteForm->createView(),
-		));
+		);
 	}
 
 	/**
-	 * Deletes a product entity.
 	 * @Security("has_role('ROLE_ADMIN')")
 	 * @Route("/{id}", name="product_delete")
 	 * @Method("DELETE")
