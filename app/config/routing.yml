@@ -9,3 +9,9 @@ core:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+inventory_new:
+    path:      /new/{id}
+    defaults:  { _controller: InventoryBundle:Inventory:new }
+    requirements:
+        number: \d+

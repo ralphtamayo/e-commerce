@@ -10,6 +10,7 @@
 				<th scope="col">Name</th>
 				<th scope="col">Description</th>
 				<th scope="col">Price</th>
+				<th scope="col">Quantity</th>
 				<th scope="col">Actions</th>
 			</tr>
 		</thead>
@@ -20,15 +21,23 @@
 					<td>{{ product.name }}</td>
 					<td>{{ product.description }}</td>
 					<td>{{ product.price }}</td>
-					<td>
-						<a class="btn btn-secondary" href="{{ path('product_show', { 'id': product.id }) }}">show</a>
-						<a class="btn btn-secondary" href="{{ path('product_edit', { 'id': product.id }) }}">edit</a>
-					</td>
+					<td>{{ product.inventory ? product.inventory.quantity : '0' }}</td>
+					{% if is_granted('ROLE_ADMIN') %}
+						<td>
+							<a class="btn btn-secondary" href="{{ path('product_show', { 'id': product.id }) }}">show</a>
+							<a class="btn btn-secondary" href="{{ path('product_edit', { 'id': product.id }) }}">edit</a>
+						</td>
+					{% else %}
+						<td>
+							<a class="btn btn-success" href="#">Add To Cart</a>
+						</td>
+					{% endif %}
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-
-	<a class="btn btn-primary" href="{{ path('product_new') }}">Create a new product</a>
+	{% if is_granted('ROLE_ADMIN') %}
+		<a class="btn btn-primary" href="{{ path('product_new') }}">Create a new product</a>
+	{% endif %}
 	
 {% endblock %}

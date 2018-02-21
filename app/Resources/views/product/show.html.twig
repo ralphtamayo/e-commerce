@@ -21,6 +21,11 @@
                 <th>Price</th>
                 <td>{{ product.price }}</td>
             </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ product.inventory ? product.inventory.quantity : '0' }}</td>
+                <td><a class="btn btn-primary" href="{{ path('inventory_new', { 'id': product.id }) }}">Add Stock</a></td>
+            </tr>
         </tbody>
     </table>
 

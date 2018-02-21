@@ -42,6 +42,12 @@ class Product
      */
     private $price;
 
+    /**
+     * One Product has One Inventory.
+     * @ORM\OneToOne(targetEntity="Inventory", mappedBy="product")
+     */
+    private $inventory;
+
 
     /**
      * Get id
@@ -124,5 +130,28 @@ class Product
     {
         return $this->price;
     }
-}
 
+    /**
+     * Set inventory
+     *
+     * @param \InventoryBundle\Entity\Inventory $inventory
+     *
+     * @return Product
+     */
+    public function setInventory(\InventoryBundle\Entity\Inventory $inventory = null)
+    {
+        $this->inventory = $inventory;
+
+        return $this;
+    }
+
+    /**
+     * Get inventory
+     *
+     * @return \InventoryBundle\Entity\Inventory
+     */
+    public function getInventory()
+    {
+        return $this->inventory;
+    }
+}
