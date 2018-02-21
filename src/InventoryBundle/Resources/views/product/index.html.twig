@@ -12,7 +12,13 @@
 					{% for product in products %}
 						<div class="col-xs-2 col-md-3">
 							<div class="product">
-								<h5 class="p-sm">{{ product.name }}</h5>
+								<h5 class="p-sm">
+								{% if is_granted('ROLE_ADMIN') %}
+									<a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.name }}</a>
+								{% else %}
+									{{ product.name }}
+								{% endif %}
+								</h5>
 								<hr>
 								<div class="product-details p-sm">
 									<p class="product-description">{{ product.description }}</p>

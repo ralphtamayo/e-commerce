@@ -1,0 +1,48 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product edit</h1>
+
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        <div class="form-group">
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+            {{ form_errors(form.username) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.firstName) }}
+            {{ form_widget(form.firstName) }}
+            {{ form_errors(form.firstName) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.lastName) }}
+            {{ form_widget(form.lastName) }}
+            {{ form_errors(form.lastName) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.address) }}
+            {{ form_widget(form.address) }}
+            {{ form_errors(form.address) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.contactDetails) }}
+            {{ form_widget(form.contactDetails) }}
+            {{ form_errors(form.contactDetails) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.current_password) }}
+            {{ form_widget(form.current_password) }}
+            {{ form_errors(form.current_password) }}
+        </div>
+        <div>
+            <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+            <a class="btn btn-primary" href="{{ path('fos_user_profile_show') }}">Back </a>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

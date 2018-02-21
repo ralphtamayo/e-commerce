@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light">
-			<a class="navbar-brand" href="{{ path('homepage') }}">Flowershop</a>
+			<a class="navbar-brand" href="{{ path('product_index') }}">Flowershop</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -21,6 +21,11 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="{{ path('product_index') }}">Home <span class="sr-only">(current)</span></a>
 					</li>
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('inventory_index') }}">Inventory <span class="sr-only">(current)</span></a>
+						</li>
+					{% endif %}
 					<li class="nav-item">
 						<a class="nav-link" href="#">Features</a>
 					</li>
@@ -36,6 +41,9 @@
 					{% else %}
 						<li class="nav-item">
 							<a class="nav-link" href="{{ path('fos_user_security_login') }}">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('fos_user_registration_register') }}">Sign Up</a>
 						</li>
 					{% endif %}
 				</ul>
