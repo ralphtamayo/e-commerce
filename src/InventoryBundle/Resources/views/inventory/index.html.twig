@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-12 r-panel">
+			<div class="r-panel-header p-sm">
+				<h2>Inventories</h2>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Product Name</th>
+						<th scope="col">Quantity</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for inventory in inventories %}
+						<tr>
+							<td>{{ inventory.product.name }}</td>
+							<td>{{ inventory.quantity }}</td>
+							{% if is_granted('ROLE_ADMIN') %}
+								<td>
+									<a class="btn btn-secondary" href="{{ path('inventory_new', { 'id': inventory.product.id }) }}">Add Stock</a>
+								</td>
+							{% endif %}
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+{% endblock %}
