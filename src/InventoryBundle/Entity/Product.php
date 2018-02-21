@@ -45,7 +45,7 @@ class Product
 		return $this->id;
 	}
 
-	public function setName(?string $name): self
+	public function setName(?string $name = null): self
 	{
 		$this->name = $name;
 
@@ -57,7 +57,7 @@ class Product
 		return $this->name;
 	}
 
-	public function setDescription(?string $description): self
+	public function setDescription(?string $description = null): self
 	{
 		$this->description = $description;
 
@@ -69,7 +69,7 @@ class Product
 		return $this->description;
 	}
 
-	public function setPrice(?string $price): self
+	public function setPrice(?string $price = null): self
 	{
 		$this->price = $price;
 

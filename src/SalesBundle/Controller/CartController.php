@@ -62,4 +62,31 @@ class CartController extends Controller
 
 		return $response;
 	}
+
+	/**
+	 * @Route("/remove/{id}", name="cart_remove_item")
+	 * @Method("POST")
+     * @Security("has_role('ROLE_USER')")
+	 */
+	public function removeItemAction(Request $request, $id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$user = $this->getUser();
+		$cart = $em->getRepository('SalesBundle:Cart')->findByUser($user->getId());
+		$cartItem = $em->getRepository('SalesBundle:CartItem')->find($id);
+
+		dump($cartItem);
+
+		$cart->removeItem($cartItem);
+
+		$em->remove($cartItem);
+		$em->persist($cart);
+		$em->flush();
+
+		$url = $this->generateUrl('cart_index', array('id' => $cart->getId()));
+		$response = new RedirectResponse($url);
+
+		return $response;
+	}
 }

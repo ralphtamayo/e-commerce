@@ -70,4 +70,11 @@ class Cart
 
 		return $this;
 	}
+
+	public function removeItem($item)
+	{
+		$this->items->removeElement($item);
+
+        return $this;
+	}
 }
