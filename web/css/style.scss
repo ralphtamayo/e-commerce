@@ -4,6 +4,15 @@
 @import 'sass/fonts';
 @import 'sass/buttons';
 @import 'sass/forms';
+@import 'sass/panels';
+
+body {
+	background: #E9EBEE;
+
+	.navbar {
+		background: #FFFFFF;
+	}
+}
 
 a {
 	&:hover {
@@ -24,4 +33,8 @@ a {
 	& > .body {
 		padding: 20px;
 	}
+}
+
+.content {
+	padding: 25px;
 }

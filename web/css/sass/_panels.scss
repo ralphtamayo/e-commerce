@@ -1,0 +1,35 @@
+.r-panel {
+    background: #FFFFFF;
+
+    .r-panel-header {
+        border-bottom: 1px solid #eaeaea;
+        text-align: center;
+    }
+    
+    .r-panel-body {
+        text-align: center;
+    }
+}
+
+.product-list {
+    .product {
+        background: #FFFFFF;
+        border: 1px solid #ddd;
+        margin-bottom: 5px;
+
+        .product-picture {
+            border-bottom: 1px solid #ddd;
+            height: 250px;
+            overflow: hidden;
+
+            img {
+                box-sizing: border-box;
+                height: 250px;
+            }
+        }
+
+        .product-action {
+            text-align: right;
+        }
+    }
+}
