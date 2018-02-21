@@ -26,12 +26,18 @@
 					</li>
 				</ul>
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('fos_user_profile_show') }}">{{ app.user.firstName }} {{ app.user.lastName }}</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('fos_user_security_logout') }}">Logout</a>
-					</li>
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('fos_user_profile_show') }}">{{ app.user.firstName }} {{ app.user.lastName }}</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('fos_user_security_logout') }}">Logout</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('fos_user_security_login') }}">Login</a>
+						</li>
+					{% endif %}
 				</ul>
 			</div>
 		</nav>
