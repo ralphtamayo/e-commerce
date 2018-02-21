@@ -32,6 +32,18 @@ class User extends BaseUser
 	 */
 	private $lastName;
 
+	/**
+	 * @ORM\Column(type="string", nullable=false)
+	 * @Assert\NotBlank(message="user.address.blank")
+	 */
+	private $address;
+
+	/**
+	 * @ORM\Column(type="string", nullable=false)
+	 * @Assert\NotBlank(message="user.contactDetails.blank")
+	 */
+	private $contactDetails;
+
     public function getId(): ?string
 	{
 		return $this->id;
@@ -60,4 +72,52 @@ class User extends BaseUser
 
 		return $this;
 	}
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set contactDetails
+     *
+     * @param string $contactDetails
+     *
+     * @return User
+     */
+    public function setContactDetails($contactDetails)
+    {
+        $this->contactDetails = $contactDetails;
+
+        return $this;
+    }
+
+    /**
+     * Get contactDetails
+     *
+     * @return string
+     */
+    public function getContactDetails()
+    {
+        return $this->contactDetails;
+    }
 }
