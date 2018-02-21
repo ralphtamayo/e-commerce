@@ -23,6 +23,7 @@
 								<div class="product-details p-sm">
 									<p class="product-description">{{ product.description }}</p>
 									<h6 class="m-t-sm m-b-sm">Price: {{ product.price }}</h6>
+									<h6 class="m-t-sm m-b-sm">Quantity Available: {{ product.inventory.quantity }}</h6>
 									{% if product.inventory.quantity > 0 %}
 										<div class="product-action p-t-md">
 											{{ form_start(form, {'action': path('cart_add_item', {'id': product.id}), 'method': 'POST'}, { 'attr' : { 'class': 'form-inline' } }) }}

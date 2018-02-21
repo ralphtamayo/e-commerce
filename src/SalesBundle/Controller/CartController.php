@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Cart controller.
@@ -46,10 +47,21 @@ class CartController extends Controller
 		$user = $this->getUser();
 		$cart = $em->getRepository('SalesBundle:Cart')->findByUser($user->getId());
 		$product = $em->getRepository('InventoryBundle:Product')->find($id);
+		$inventory = $product->getInventory();
 
 		$cartItem = new CartItem();
 		$form = $this->createForm('SalesBundle\Form\CartItemType', $cartItem);
 		$form->handleRequest($request);
+
+		if ($form->getData()->getQuantity() > $product->getInventory()->getQuantity()) {
+			// $error = new FormError("Not enough quantity available");
+			// $form->get('quantity')->addError($error);
+			// return $this->generateUrl('product_index', array('form' => $form));
+			throw new Exception ('Not enough quantity available');
+		}
+
+		$inventory->deductQuantity($cartItem->getQuantity());
+		$em->persist($inventory);
 
 		$cartItem->setProduct($product);
 		$cartItem->setCart($cart);
@@ -75,6 +87,10 @@ class CartController extends Controller
 		$user = $this->getUser();
 		$cart = $em->getRepository('SalesBundle:Cart')->findByUser($user->getId());
 		$cartItem = $em->getRepository('SalesBundle:CartItem')->find($id);
+		$inventory = $cartItem->getProduct()->getInventory();
+		
+		$inventory->addQuantity($cartItem->getQuantity());
+		$em->persist($inventory);
 
 		$cart->removeItem($cartItem);
 
