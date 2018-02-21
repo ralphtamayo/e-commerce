@@ -12,146 +12,84 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+	/**
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue
+	 */
+	protected $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
+	/**
+	 * @ORM\Column(name="name", type="string", length=255)
+	 */
+	private $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
-     */
-    private $description;
+	/**
+	 * @ORM\Column(name="description", type="string", length=255, nullable=true)
+	 */
+	private $description;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
-     */
-    private $price;
+	/**
+	 * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
+	 */
+	private $price;
 
-    /**
-     * One Product has One Inventory.
-     * @ORM\OneToOne(targetEntity="Inventory", mappedBy="product")
-     */
-    private $inventory;
+	/**
+	 * One Product has One Inventory.
+	 * @ORM\OneToOne(targetEntity="Inventory", mappedBy="product")
+	 */
+	private $inventory;
 
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	public function setName(?string $name): self
+	{
+		$this->name = $name;
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Product
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	public function setDescription(?string $description): self
+	{
+		$this->description = $description;
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Product
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
+		return $this;
+	}
 
-        return $this;
-    }
+	public function getDescription(): ?string
+	{
+		return $this->description;
+	}
 
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
+	public function setPrice(?string $price): self
+	{
+		$this->price = $price;
 
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return Product
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
+		return $this;
+	}
 
-        return $this;
-    }
+	public function getPrice(): ?string
+	{
+		return $this->price;
+	}
 
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
+	public function setInventory(?Inventory $inventory = null): self
+	{
+		$this->inventory = $inventory;
 
-    /**
-     * Set inventory
-     *
-     * @param \InventoryBundle\Entity\Inventory $inventory
-     *
-     * @return Product
-     */
-    public function setInventory(\InventoryBundle\Entity\Inventory $inventory = null)
-    {
-        $this->inventory = $inventory;
+		return $this;
+	}
 
-        return $this;
-    }
-
-    /**
-     * Get inventory
-     *
-     * @return \InventoryBundle\Entity\Inventory
-     */
-    public function getInventory()
-    {
-        return $this->inventory;
-    }
+	public function getInventory(): ?Inventory
+	{
+		return $this->inventory;
+	}
 }

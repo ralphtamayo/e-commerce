@@ -13,91 +13,58 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Inventory
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+	/**
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue
+	 */
+	protected $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="quantity", type="integer")
-     * @Assert\GreaterThan(0)
-     */
-    private $quantity;
+	/**
+	 * @ORM\Column(name="quantity", type="integer")
+	 * @Assert\GreaterThan(0)
+	 */
+	private $quantity;
 
-    /**
-     * One Inventory has One Product.
-     * @ORM\OneToOne(targetEntity="Product", inversedBy="inventory")
-     */
-    private $product;
+	/**
+	 * One Inventory has One Product.
+	 * @ORM\OneToOne(targetEntity="Product", inversedBy="inventory")
+	 */
+	private $product;
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-    /**
-     * Set quantity
-     *
-     * @param integer $quantity
-     *
-     * @return Inventory
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
+	public function setQuantity(?string $quantity): self
+	{
+		$this->quantity = $quantity;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function addQuantity($quantity)
-    {
-        $this->quantity += $quantity;
+	public function addQuantity(?string $quantity): self
+	{
+		$this->quantity += $quantity;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get quantity
-     *
-     * @return int
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
+	public function getQuantity(): ?string
+	{
+		return $this->quantity;
+	}
 
-    /**
-     * Set product
-     *
-     * @param \InventoryBundle\Entity\Product $product
-     *
-     * @return Inventory
-     */
-    public function setProduct(\InventoryBundle\Entity\Product $product = null)
-    {
-        $this->product = $product;
+	public function setProduct(?Product $product = null): self
+	{
+		$this->product = $product;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get product
-     *
-     * @return \InventoryBundle\Entity\Product
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
+	public function getProduct(): ?Product
+	{
+		return $this->product;
+	}
 }
