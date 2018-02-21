@@ -27,7 +27,7 @@ class CartController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$cart = $em->getRepository('SalesBundle:Cart')->load($id);
+		$cart = $em->getRepository('SalesBundle:Cart')->find($id);
 
 		return array(
 			'cart' => $cart,
