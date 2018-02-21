@@ -76,8 +76,6 @@ class CartController extends Controller
 		$cart = $em->getRepository('SalesBundle:Cart')->findByUser($user->getId());
 		$cartItem = $em->getRepository('SalesBundle:CartItem')->find($id);
 
-		dump($cartItem);
-
 		$cart->removeItem($cartItem);
 
 		$em->remove($cartItem);
