@@ -51,6 +51,13 @@ class Inventory
 		return $this;
 	}
 
+	public function deductQuantity(?string $quantity): self
+	{
+		$this->quantity -= $quantity;
+
+		return $this;
+	}
+
 	public function getQuantity(): ?string
 	{
 		return $this->quantity;
