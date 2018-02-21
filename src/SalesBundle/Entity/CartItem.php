@@ -3,6 +3,7 @@
 namespace SalesBundle\Entity;
 
 use CoreBundle\Entity\User;
+use InventoryBundle\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -33,6 +34,12 @@ class CartItem
 	 */
 	private $product;
 
+	/**
+	 * @ORM\Column(name="quantity", type="integer")
+	 * @Assert\GreaterThan(0)
+	 */
+	private $quantity;
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -48,5 +55,29 @@ class CartItem
 		$this->cart = $cart;
 
 		return $this;
+	}
+
+	public function getProduct(): ?Product
+	{
+		return $this->product;
+	}
+
+	public function setProduct(?Product $product): self
+	{
+		$this->product = $product;
+
+		return $this;
+	}
+
+	public function setQuantity(?string $quantity): self
+	{
+		$this->quantity = $quantity;
+
+		return $this;
+	}
+
+	public function getQuantity(): ?string
+	{
+		return $this->quantity;
 	}
 }

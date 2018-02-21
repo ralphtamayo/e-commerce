@@ -3,6 +3,7 @@
 namespace InventoryBundle\Controller;
 
 use InventoryBundle\Entity\Product;
+use SalesBundle\Entity\CartItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,10 +27,14 @@ class ProductController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 
+		$cartItem = new CartItem();
+		$form = $this->createForm('SalesBundle\Form\CartItemType', $cartItem);
+
 		$products = $em->getRepository('InventoryBundle:Product')->findAll();
 
 		return array(
 			'products' => $products,
+			'form' => $form->createView(),
 		);
 	}
 

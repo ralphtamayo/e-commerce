@@ -367,6 +367,10 @@ label {
   width: 100%;
 }
 
+.quantity-box {
+  width: 50px;
+}
+
 .r-panel {
   background: #FFFFFF;
 }
@@ -402,10 +406,6 @@ label {
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 3;
-}
-
-.product-list .product .product-action {
-  text-align: right;
 }
 
 body {

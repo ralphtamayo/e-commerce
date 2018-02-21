@@ -24,6 +24,11 @@ class Cart
 	protected $id;
 
 	/**
+	 * @ORM\OneToOne(targetEntity="CoreBundle\Entity\User", inversedBy="cart")
+	 */
+	private $user;
+
+	/**
 	 * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart", cascade={"persist", "remove"})
 	 */
 	private $items;
@@ -38,7 +43,7 @@ class Cart
 		return $this->id;
 	}
 
-	public function setUser(?User $user = null): self
+	public function setUser(?User $user): self
 	{
 		$this->user = $user;
 

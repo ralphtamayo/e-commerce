@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-12 r-panel">
+			<div class="r-panel-header p-sm">
+				<h2>Cart summary</h2>
+			</div>
+
+            <div class="r-panel-body container-fluid">
+				<table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart.items %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.product.price }}</td>
+                                <td>{{ item.quantity * item.product.price }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+			</div>
+
+        </div>
+    </div>
+{% endblock body %}
