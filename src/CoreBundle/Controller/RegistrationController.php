@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Controller;
 
+use SalesBundle\Entity\Cart;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -38,6 +39,15 @@ class RegistrationController extends BaseController
 					$response = new RedirectResponse($url);
 				}
 				$dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+				$cart = new Cart();
+
+				$cart->setUser($user);
+
+				$em = $this->getDoctrine()->getManager();
+
+				$em->persist($cart);
+				$em->flush();
 
 				return $response;
 			}

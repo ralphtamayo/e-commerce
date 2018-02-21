@@ -1,6 +1,7 @@
 <?php
 namespace CoreBundle\Entity;
 
+use SalesBundle\Entity\Cart;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -43,6 +44,11 @@ class User extends BaseUser
 	 * @Assert\NotBlank(message="user.contactDetails.blank")
 	 */
 	private $contactDetails;
+
+	/**
+	 * @ORM\OneToOne(targetEntity="SalesBundle\Entity\Cart", mappedBy="user")
+	 */
+	private $cart;
 
 	public function getId(): ?string
 	{
@@ -95,5 +101,17 @@ class User extends BaseUser
 	public function getContactDetails(): ?string
 	{
 		return $this->contactDetails;
+	}
+
+	public function setCart(?Cart $cart = null): self
+	{
+		$this->cart = $cart;
+
+		return $this;
+	}
+
+	public function getCart(): ?Cart
+	{
+		return $this->cart;
 	}
 }
