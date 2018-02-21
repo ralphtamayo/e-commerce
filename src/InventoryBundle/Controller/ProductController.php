@@ -3,6 +3,7 @@
 namespace InventoryBundle\Controller;
 
 use InventoryBundle\Entity\Product;
+use InventoryBundle\Entity\Inventory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -42,11 +43,15 @@ class ProductController extends Controller
 	public function newAction(Request $request)
 	{
 		$product = new Product();
+		$inventory = new Inventory();
 		$form = $this->createForm('InventoryBundle\Form\ProductType', $product);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
 			$em = $this->getDoctrine()->getManager();
+			$inventory->setProduct($product);
+			$inventory->setQuantity(0);
+			$em->persist($inventory);
 			$em->persist($product);
 			$em->flush();
 

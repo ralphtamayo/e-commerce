@@ -34,7 +34,7 @@ class RegistrationController extends BaseController
 				$dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 				$userManager->updateUser($user);
 				if (null === $response = $event->getResponse()) {
-					$url = $this->generateUrl('fos_user_security_login');
+					$url = $this->generateUrl('product_index');
 					$response = new RedirectResponse($url);
 				}
 				$dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));

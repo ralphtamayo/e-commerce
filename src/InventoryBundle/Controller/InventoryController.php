@@ -18,6 +18,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class InventoryController extends Controller
 {
     /**
+	 * @Route("/", name="inventory_index")
+	 * @Template("@Inventory/inventory/index.html.twig")
+	 * @Method("GET")
+	 */
+	public function indexAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$inventories = $em->getRepository('InventoryBundle:Inventory')->findAll();
+
+		return array(
+			'inventories' => $inventories,
+		);
+    }
+
+    /**
      * @Route("/new/{id}", name="inventory_new")
 	 * @Template("@Inventory/inventory/new.html.twig")
      * @Method({"GET", "POST"})
@@ -46,7 +62,7 @@ class InventoryController extends Controller
             
             $em->flush();
 
-            return $this->redirectToRoute('product_show', array('id' => $product->getId()));
+            return $this->redirectToRoute('inventory_index');
         }
 
         return array(
