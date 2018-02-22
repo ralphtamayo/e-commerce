@@ -2,17 +2,17 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-md-12 r-panel">
-			<div class="r-panel-header p-sm">
+		<div class="col-md-6 mx-auto r-panel">
+			<div class="p-md text-center">
 				<h2>Inventories</h2>
 			</div>
 
-			<table class="table">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th scope="col">Product Name</th>
 						<th scope="col">Quantity</th>
-						<th scope="col">Actions</th>
+						<th scope="col" class="text-right">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -21,7 +21,7 @@
 							<td>{{ inventory.product.name }}</td>
 							<td>{{ inventory.quantity }}</td>
 							{% if is_granted('ROLE_ADMIN') %}
-								<td>
+								<td class="text-right">
 									<a class="btn btn-secondary" href="{{ path('inventory_new', { 'id': inventory.product.id }) }}">Add Stock</a>
 								</td>
 							{% endif %}
