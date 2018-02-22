@@ -28,7 +28,7 @@
 								<td>{{ (item.quantity * item.product.price) | number_format(2) }}</td>
 								<td>
 									<form action="{{ path('cart_remove_item', {'id': item.id}) }}" method="post">
-										<button type="submit" class="btn btn-default">Remove Item</button>
+										<button type="submit" class="btn btn-danger">Remove Item</button>
 									</form>
 								</td>
 							</tr>
@@ -46,7 +46,7 @@
 				{% for cart in app.user.carts  %}
 					{% if cart.isActive == true %}
 						<form action="{{ path('payment_new', {'id': cart.id}) }}" method="post">
-							<button type="submit" class="btn btn-default">Checkout</button>
+							<button type="submit" class="btn btn-primary">Checkout</button>
 						</form>
 					{% endif %}
 				{% endfor %}
