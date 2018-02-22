@@ -8,7 +8,7 @@
 			</div>
 
 			<div class="r-panel-body container-fluid">
-				<ul class="row product-list m-t-md">
+				<div class="row product-list m-t-md">
 					{% for product in products %}
 						<div class="col-xs-2 col-md-3">
 							<div class="product">
@@ -38,9 +38,11 @@
 							</div>
 						</div>
 					{% endfor %}
-				</ul>
+				</div>
 				{% if is_granted('ROLE_ADMIN') %}
-					<a class="btn btn-primary" href="{{ path('product_new') }}">Create a new product</a>
+					<div class="align-right p-i-l-md">
+						<a class="btn btn-primary" href="{{ path('product_new') }}">Create a new product</a>
+					</div>
 				{% endif %}
 			</div>
 		</div>
