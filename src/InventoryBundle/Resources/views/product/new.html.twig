@@ -24,6 +24,11 @@
 						{{ form_errors(form.price) }}
 					</div>
 					<div class="col-md-12 form-group">
+						{{ form_label(form.image) }}
+						{{ form_widget(form.image, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.image) }}
+					</div>
+					<div class="col-md-12 form-group">
 						<button class="btn btn-primary btn-block" type="submit">Create</button>
 					</div>
 					<div class="col-md-12 form-group">

@@ -3,6 +3,7 @@
 namespace InventoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -39,6 +40,14 @@ class Product
 	 * @ORM\OneToOne(targetEntity="Inventory", mappedBy="product")
 	 */
 	private $inventory;
+
+	/**
+	 * @ORM\Column(type="string")
+	 *
+	 * @Assert\NotBlank(message="Please, upload the product image as a (png/jpg) file.")
+	 * @Assert\File(maxSize="2M", maxSizeMessage="File is too large. Max of 2MB", mimeTypes={ "image/png", "image/jpg" }, mimeTypesMessage="PNG/JPG file only")
+	 */
+	private $image;
 
 	public function getId(): ?int
 	{
@@ -91,5 +100,17 @@ class Product
 	public function getInventory(): ?Inventory
 	{
 		return $this->inventory;
+	}
+
+	public function getImage()
+	{
+		return $this->image;
+	}
+
+	public function setImage($image)
+	{
+		$this->image = $image;
+
+		return $this;
 	}
 }
