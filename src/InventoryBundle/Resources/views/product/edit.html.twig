@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row">
+	<div class="row">
 		<div class="col-md-4 mx-auto r-panel">
 			<div class="r-panel-header p-sm">
 				<h2>Edit Product</h2>
@@ -24,6 +24,11 @@
 						{{ form_errors(edit_form.price) }}
 					</div>
 					<div class="col-md-12 form-group">
+						{{ form_label(edit_form.image) }}
+						{{ form_widget(edit_form.image, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(edit_form.image) }}
+					</div>
+					<div class="col-md-12 form-group">
 						<button class="btn btn-primary btn-block" type="submit">Edit</button>
 					</div>
 					<div class="col-md-12 form-group">
@@ -33,5 +38,5 @@
 			</div>
 		</div>
 	</div>
-        
+	
 {% endblock %}

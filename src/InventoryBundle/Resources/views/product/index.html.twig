@@ -19,6 +19,9 @@
 									{{ product.name }}
 								{% endif %}
 								</h5>
+								<div style="overflow: hidden">
+									<img src="{{ asset('uploads/images/' ~ product.image) }}">
+								</div>
 								<hr>
 								<div class="product-details p-sm">
 									<p class="product-description">{{ product.description }}</p>
