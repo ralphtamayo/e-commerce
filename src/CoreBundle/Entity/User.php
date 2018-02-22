@@ -2,6 +2,7 @@
 namespace CoreBundle\Entity;
 
 use SalesBundle\Entity\Cart;
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -46,16 +47,21 @@ class User extends BaseUser
 	private $contactDetails;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="SalesBundle\Entity\Cart", mappedBy="user")
+	 * @ORM\OneToMany(targetEntity="SalesBundle\Entity\Cart", mappedBy="user")
 	 */
-	private $cart;
+	private $carts;
+
+	public function __construct()
+	{
+		$this->carts = new ArrayCollection();
+	}
 
 	public function getId(): ?string
 	{
 		return $this->id;
 	}
 
-	public function setFirstName(?string $firstName): self
+	public function setFirstName(?string $firstName = null): self
 	{
 		$this->firstName = $firstName;
 
@@ -67,7 +73,7 @@ class User extends BaseUser
 		return $this->firstName;
 	}
 
-	public function setLastName(?string $lastName): self
+	public function setLastName(?string $lastName = null): self
 	{
 		$this->lastName = $lastName;
 
@@ -79,7 +85,7 @@ class User extends BaseUser
 		return $this->lastName;
 	}
 
-	public function setAddress(?string $address): self
+	public function setAddress(?string $address = null): self
 	{
 		$this->address = $address;
 
@@ -91,7 +97,7 @@ class User extends BaseUser
 		return $this->address;
 	}
 
-	public function setContactDetails(?string $contactDetails): self
+	public function setContactDetails(?string $contactDetails = null): self
 	{
 		$this->contactDetails = $contactDetails;
 
@@ -103,15 +109,19 @@ class User extends BaseUser
 		return $this->contactDetails;
 	}
 
-	public function setCart(?Cart $cart = null): self
+	public function getCarts()
 	{
-		$this->cart = $cart;
-
-		return $this;
+		return $this->carts;
 	}
 
-	public function getCart(): ?Cart
+	public function setCarts(DoctrineCollection $carts): self
 	{
-		return $this->cart;
+		$this->carts = $carts;
+
+		foreach ($carts as $cart) {
+			$cart->setUser($this);
+		}
+
+		return $this;
 	}
 }

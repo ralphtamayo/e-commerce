@@ -26,7 +26,8 @@ class CartRepository extends EntityRepository
 		$qb = $this->createQueryBuilder('cart')
 			->select('cart')
 			->join('cart.user', 'user')
-			->andWhere("user.id = :id")
+			->andWhere('user.id = :id')
+			->andWhere('cart.isActive = 1')
 			->setParameter('id', $id)
 		;
 

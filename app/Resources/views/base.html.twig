@@ -33,7 +33,16 @@
 				<ul class="navbar-nav ml-auto">
 					{% if app.user %}
 						<li class="nav-item">
-							<a class="nav-link" href="{{ path('cart_index', {'id': app.user.cart.id}) }}">Cart</a>
+							{% for cart in app.user.carts  %}
+								{% if cart.isActive == true %}
+									<a class="nav-link" href="{{ path('cart_index', {'id': cart.id}) }}">
+										Cart
+										{% if cart.items|length > 0 %}
+											<span class="badge badge-pill badge-danger"> {{ cart.items|length }} </span>
+										{% endif %}
+									</a>
+								{% endif %}
+							{% endfor %}
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ path('fos_user_profile_show') }}">{{ app.user.firstName }} {{ app.user.lastName }}</a>

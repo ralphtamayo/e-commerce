@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <p><strong>Total: </strong> {{ total }} </p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
+{% endblock body %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/payment.js') }}"></script>
+{% endblock %}
