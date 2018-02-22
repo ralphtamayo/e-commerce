@@ -1,25 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Product creation</h1>
-
-    {{ form_start(form) }}
-        <div class="form-group">
-			{{ form_label(form.name) }}
-			{{ form_widget(form.name) }}
-			{{ form_errors(form.name) }}
+	<div class="row">
+		<div class="col-md-4 mx-auto r-panel">
+			<div class="r-panel-header p-sm">
+				<h2>New Product</h2>
+			</div>
+			<div class="r-panel-body container-fluid">
+				{{ form_start(form, {'attr': {'class': 'row align-left m-t-md'}}) }}
+					<div class="col-md-12 form-group">
+						{{ form_label(form.name) }}
+						{{ form_widget(form.name, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.name) }}
+					</div>
+					<div class="col-md-12 form-group">
+						{{ form_label(form.description) }}
+						{{ form_widget(form.description, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.description) }}
+					</div>
+					<div class="col-md-12 form-group">
+						{{ form_label(form.price) }}
+						{{ form_widget(form.price, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.price) }}
+					</div>
+					<div class="col-md-12 form-group">
+						<button class="btn btn-primary btn-block" type="submit">Create</button>
+					</div>
+					<div class="col-md-12 form-group">
+						<a href="{{ path('product_index') }}" class="btn btn-block btn-danger">Cancel</a>
+					</div>
+				{{ form_end(form) }}
+			</div>
 		</div>
-		<div class="form-group">
-			{{ form_label(form.description) }}
-			{{ form_widget(form.description) }}
-			{{ form_errors(form.description) }}
-		</div>
-		<div class="form-group">
-			{{ form_label(form.price) }}
-			{{ form_widget(form.price) }}
-			{{ form_errors(form.price) }}
-		</div>
-        <button class="btn btn-primary" type="submit">Submit</button>
-    {{ form_end(form) }}
-	<a class="btn btn-secondary"  href="{{ path('product_index') }}">Back to the list</a>]
+	</div>
 {% endblock %}

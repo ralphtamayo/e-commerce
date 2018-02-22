@@ -43,6 +43,7 @@ class RegistrationController extends BaseController
 				$cart = new Cart();
 
 				$cart->setUser($user);
+				$cart->setIsActive(true);
 
 				$em = $this->getDoctrine()->getManager();
 

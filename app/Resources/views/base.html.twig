@@ -26,9 +26,6 @@
 							<a class="nav-link" href="{{ path('inventory_index') }}">Inventory <span class="sr-only">(current)</span></a>
 						</li>
 					{% endif %}
-					<li class="nav-item">
-						<a class="nav-link" href="#">Features</a>
-					</li>
 				</ul>
 				<ul class="navbar-nav ml-auto">
 					{% if app.user %}
@@ -36,7 +33,7 @@
 							{% for cart in app.user.carts  %}
 								{% if cart.isActive == true %}
 									<a class="nav-link" href="{{ path('cart_index', {'id': cart.id}) }}">
-										Cart
+										<i class="fa fa-shopping-cart"></i>
 										{% if cart.items|length > 0 %}
 											<span class="badge badge-pill badge-danger"> {{ cart.items|length }} </span>
 										{% endif %}
