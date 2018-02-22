@@ -1,6 +1,7 @@
 <h3>Payment Details: </h3>
-<p><strong>Total: </strong>{{ payment.total }}</p>
+<p><strong>Total: </strong>{{ payment.total | number_format(2) }}</p>
 <p><strong>Payment Mode: </strong>{{ payment.paymentMode }}</p>
+<p><strong>Cart Number: </strong>{{ payment.cardNumber }}</p>
 
 <table class="table table-striped">
 	<thead>
