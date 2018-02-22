@@ -24,7 +24,7 @@ class Cart
 	protected $id;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="CoreBundle\Entity\User", inversedBy="cart")
+	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\User", inversedBy="carts")
 	 */
 	private $user;
 
@@ -32,6 +32,16 @@ class Cart
 	 * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart", cascade={"persist", "remove"})
 	 */
 	private $items;
+
+	/**
+	 * @ORM\OneToOne(targetEntity="Payment", inversedBy="cart")
+	 */
+	private $payment;
+
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	private $isActive;
 
 	public function __construct()
 	{
@@ -76,5 +86,29 @@ class Cart
 		$this->items->removeElement($item);
 
         return $this;
+	}
+
+	public function setPayment(?Payment $payment): self
+	{
+		$this->payment = $payment;
+
+		return $this;
+	}
+
+	public function getPayment(): ?Payment
+	{
+		return $this->payment;
+	}
+
+	public function isActive(): ?bool
+	{
+		return $this->isActive;
+	}
+
+	public function setIsActive(?bool $isActive = true): self
+	{
+		$this->isActive = $isActive;
+
+		return $this;
 	}
 }
