@@ -7,7 +7,7 @@
 				<h2>Payment</h2>
 			</div>
 			<div class="r-panel-body container-fluid align-left">
-				{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+				{{ form_start(form, {'action': path('payment_create', {'id': id}), 'method': 'POST', 'attr': {'novalidate': 'novalidate'}}) }}
 					<div class="col-md-12 form-group">
 						{{ form_label(form.paymentMode) }}
 						{{ form_widget(form.paymentMode, {'attr': {'class': 'form-box'}}) }}

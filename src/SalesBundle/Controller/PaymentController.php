@@ -57,8 +57,8 @@ class PaymentController extends Controller
 		}
 
 		return array(
+			'id' => $id,
 			'total' => $total,
-			'payment' => $payment,
 			'form' => $form->createView(),
 		);
 	}
@@ -101,6 +101,24 @@ class PaymentController extends Controller
 				$em->flush();
 
 			}
+
+			$message = \Swift_Message::newInstance()
+				->setSubject('Flowershop Order Numer: ' . $cart->getId())
+				->setFrom('ralphtamayo@creatinginfo.com')
+				->setTo('tamayoralph24@gmail.com')
+				->setBody(
+					$this->renderView(
+						'email\e-mail.html.twig',
+						array(
+							'payment' => $payment,
+							'cart' => $cart,
+						)
+					),
+					'text/html'
+				)
+			;
+
+			$this->get('mailer')->send($message);
 
 			return $this->redirectToRoute('payment_show', array('id' => $payment->getId()));
 		}

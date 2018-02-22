@@ -1,0 +1,25 @@
+<h3>Payment Details: </h3>
+<p><strong>Total: </strong>{{ payment.total | number_format(2) }}</p>
+<p><strong>Payment Mode: </strong>{{ payment.paymentMode }}</p>
+<p><strong>Cart Number: </strong>{{ payment.cardNumber }}</p>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Total</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in cart.items %}
+			<tr>
+				<td>{{ item.product.name }}</td>
+				<td>{{ item.quantity }}</td>
+				<td>{{ item.product.price | number_format(2) }}</td>
+				<td>{{ (item.quantity * item.product.price) | number_format(2) }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
