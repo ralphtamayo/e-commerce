@@ -29,10 +29,10 @@
 									<h6 class="m-t-sm m-b-sm">Quantity Available: {{ product.inventory.quantity }}</h6>
 									{% if product.inventory.quantity > 0 %}
 										<div class="product-action p-t-md">
-											{{ form_start(form, {'action': path('cart_add_item', {'id': product.id}), 'method': 'POST'}, { 'attr' : { 'class': 'form-inline' } }) }}
-												{{ form_row(form.quantity, {'attr': {'class': 'form-control', 'placeholder': 'Quantity'}}) }}
+											{{ form_start(form[product.id], {'action': path('cart_add_item', {'id': product.id}), 'method': 'POST'}, { 'attr' : { 'class': 'form-inline' } }) }}
+												{{ form_row(form[product.id].quantity, {'attr': {'class': 'form-control', 'placeholder': 'Quantity'}}) }}
 												<button type="submit" class="btn btn-primary m-t-sm" data-toggle="modal">Add to cart</button>
-											{{ form_end(form) }}
+											{{ form_end(form[product.id]) }}
 										</div>
 									{% else %}
 										<h4>Out of stock</h4>

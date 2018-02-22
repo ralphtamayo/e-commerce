@@ -34,9 +34,13 @@ class ProductController extends Controller
 
 		$products = $em->getRepository('InventoryBundle:Product')->findAll();
 
+		foreach ($products as $product) {
+			$forms[$product->getId()] = $form->createView();
+		}
+
 		return array(
 			'products' => $products,
-			'form' => $form->createView(),
+			'form' => $forms,
 		);
 	}
 
