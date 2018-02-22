@@ -6,6 +6,7 @@ use CoreBundle\Entity\User;
 use InventoryBundle\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * CartItem
@@ -80,4 +81,16 @@ class CartItem
 	{
 		return $this->quantity;
 	}
+
+	/**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if ($this->getQuantity() > $this->getProduct()->getInventory()->getQuantity()) {
+            $context->buildViolation('Quantity available is not enough.')
+                ->atPath('quantity')
+                ->addViolation();
+        }
+    }
 }

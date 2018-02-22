@@ -5,6 +5,7 @@ namespace SalesBundle\Entity;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Payment
@@ -147,4 +148,16 @@ class Payment
 	{
 		return $this->total;
 	}
+
+	/**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if ($this->getTotal() <= 0) {
+            $context->buildViolation('Total must be greater than 0. Please add item to cart first.')
+                ->atPath('expirationYear')
+                ->addViolation();
+        }
+    }
 }

@@ -44,8 +44,8 @@ class Product
 	/**
 	 * @ORM\Column(type="string")
 	 *
-	 * @Assert\NotBlank(message="Please, upload the product image as a (png/jpg) file.")
-	 * @Assert\File(maxSize="2M", maxSizeMessage="File is too large. Max of 2MB", mimeTypes={ "image/png", "image/jpg" }, mimeTypesMessage="PNG/JPG file only")
+	 * @Assert\NotBlank(message="Please upload the product image as a (png/jpg) file.")
+	 * @Assert\File(maxSize="2M", maxSizeMessage="File is too large. Max of 2MB", mimeTypes={ "image/png", "image/jpg", "image/jpeg" }, mimeTypesMessage="PNG/JPG/JPEG file only")
 	 */
 	private $image;
 

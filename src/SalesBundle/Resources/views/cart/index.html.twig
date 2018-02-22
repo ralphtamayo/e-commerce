@@ -15,7 +15,11 @@
 							<th scope="col">Quantity</th>
 							<th scope="col">Price</th>
 							<th scope="col">Total</th>
-							<th scope="col">Action</th>
+							<th scope="col">
+							{% if cart.isActive %}
+								Action
+							{% endif %}
+							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -28,9 +32,12 @@
 									<td>{{ item.product.price | number_format(2)}}</td>
 									<td>{{ (item.quantity * item.product.price) | number_format(2) }}</td>
 									<td>
-										<form action="{{ path('cart_remove_item', {'id': item.id}) }}" method="post">
-											<button type="submit" class="btn btn-danger">Remove Item</button>
-										</form>
+									{% if cart.isActive %}
+											<form action="{{ path('cart_remove_item', {'id': item.id}) }}" method="post">
+												<button type="submit" class="btn btn-danger">Remove Item</button>
+											</form>
+										
+									{% endif %}
 									</td>
 								</tr>
 								{% set grandTotal = grandTotal + (item.quantity * item.product.price) %}
@@ -50,13 +57,11 @@
 					</tbody>
 				</table>
 				<div class="align-right p-i-r-md">
-					{% for cart in app.user.carts  %}
-						{% if cart.isActive == true %}
-							<form action="{{ path('payment_new', {'id': cart.id}) }}" method="get">
-								<button type="submit" class="btn btn-primary">Checkout</button>
-							</form>
-						{% endif %}
-					{% endfor %}
+					{% if cart.isActive and cart.items | length > 0 %}
+						<form action="{{ path('payment_new', {'id': cart.id}) }}" method="get">
+							<button type="submit" class="btn btn-primary">Checkout</button>
+						</form>
+					{% endif %}
 				</div>
 			</div>
 
