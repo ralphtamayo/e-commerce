@@ -1,13 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_widget(form) }}
-        <p><strong>Total: </strong> {{ total }} </p>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    {{ form_end(form) }}
+	<div class="row">
+		<div class="col-md-4 mx-auto r-panel">
+			<div class="r-panel-header p-sm">
+				<h2>Payment</h2>
+			</div>
+			<div class="r-panel-body container-fluid align-left">
+				{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+					<div class="col-md-12 form-group">
+						{{ form_label(form.paymentMode) }}
+						{{ form_widget(form.paymentMode, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.paymentMode) }}
+					</div>
+					<div class="col-md-12 form-group">
+						{{ form_label(form.cardNumber) }}
+						{{ form_widget(form.cardNumber, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.cardNumber) }}
+					</div>
+					<div class="col-md-12 form-group">
+						{{ form_label(form.expirationMonth) }}
+						{{ form_widget(form.expirationMonth, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.expirationMonth) }}
+					</div>
+					<div class="col-md-12 form-group">
+						{{ form_label(form.expirationYear) }}
+						{{ form_widget(form.expirationYear, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.expirationYear) }}
+					</div>
+					<div class="col-md-12 form-group">
+						{{ form_label(form.referenceNumber) }}
+						{{ form_widget(form.referenceNumber, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.referenceNumber) }}
+					</div>
+					<div class="col-md-12 form-group">
+						<label>Total: </label>
+						<p>{{ total }}</p>
+					</div>
+					<div class="col-md-12 form-group">
+						<button type="submit" class="btn btn-primary btn-block">Submit</button>
+						{% for cart in app.user.carts  %}
+							{% if cart.isActive == true %}
+								<a href="{{ path('cart_index', {'id': cart.id}) }}" class="btn btn-block btn-danger">Cancel</a>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
 {% endblock body %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/payment.js') }}"></script>
+	<script src="{{ asset('js/payment.js') }}"></script>
 {% endblock %}

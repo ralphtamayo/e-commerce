@@ -45,7 +45,7 @@
 				</table>
 				{% for cart in app.user.carts  %}
 					{% if cart.isActive == true %}
-						<form action="{{ path('payment_new', {'id': cart.id}) }}" method="post">
+						<form action="{{ path('payment_new', {'id': cart.id}) }}" method="get">
 							<button type="submit" class="btn btn-primary">Checkout</button>
 						</form>
 					{% endif %}
