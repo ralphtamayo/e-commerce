@@ -59,13 +59,29 @@ class PaymentController extends Controller
 
 			}
 
-			// return $this->redirectToRoute('product_show', array('id' => $product->getId()));
+			return $this->redirectToRoute('payment_show', array('id' => $payment->getId()));
 		}
 
 		return array(
 			'total' => $total,
 			'payment' => $payment,
 			'form' => $form->createView(),
+		);
+	}
+
+	/**
+	 * @Route("/{id}", name="payment_show")
+	 * @Template("@Sales/payment/show.html.twig")
+	 * @Method("GET")
+	 * @Security("has_role('ROLE_USER')")
+	 */
+	public function showAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$payment = $em->getRepository('SalesBundle:Payment')->find($id);
+
+		return array(
+			'payment' => $payment,
 		);
 	}
 
