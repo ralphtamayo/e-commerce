@@ -3,12 +3,12 @@
 {% block body %}
 	<div class="row">
 		<div class="col-md-12 r-panel">
-			<div class="r-panel-header p-sm">
-				<h2>Cart summary</h2>
+			<div class="p-md text-center">
+				<h2>Cart Summary</h2>
 			</div>
 
 			<div class="r-panel-body container-fluid">
-				<table class="table">
+				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th scope="col">Product</th>
@@ -20,36 +20,44 @@
 					</thead>
 					<tbody>
 						{% set grandTotal = 0 %}
-						{% for item in cart.items %}
+						{% if cart.items|length > 0 %}
+							{% for item in cart.items %}
+								<tr>
+									<td>{{ item.product.name }}</td>
+									<td>{{ item.quantity }}</td>
+									<td>{{ item.product.price | number_format(2)}}</td>
+									<td>{{ (item.quantity * item.product.price) | number_format(2) }}</td>
+									<td>
+										<form action="{{ path('cart_remove_item', {'id': item.id}) }}" method="post">
+											<button type="submit" class="btn btn-danger">Remove Item</button>
+										</form>
+									</td>
+								</tr>
+								{% set grandTotal = grandTotal + (item.quantity * item.product.price) %}
+							{% endfor %}
 							<tr>
-								<td>{{ item.product.name }}</td>
-								<td>{{ item.quantity }}</td>
-								<td>{{ item.product.price | number_format(2)}}</td>
-								<td>{{ (item.quantity * item.product.price) | number_format(2) }}</td>
-								<td>
-									<form action="{{ path('cart_remove_item', {'id': item.id}) }}" method="post">
-										<button type="submit" class="btn btn-danger">Remove Item</button>
-									</form>
-								</td>
+								<td><strong>Total</strong></td>
+								<td></td>
+								<td></td>
+								<td>{{ grandTotal | number_format(2)}}</td>
+								<td></td>
 							</tr>
-							{% set grandTotal = grandTotal + (item.quantity * item.product.price) %}
-						{% endfor %}
-						<tr>
-							<td><strong>Total</strong></td>
-							<td></td>
-							<td></td>
-							<td>{{ grandTotal | number_format(2)}}</td>
-							<td></td>
-						</tr>
+						{% else %}
+							<tr>
+								<td colspan="5">No entries</td>
+							</tr>
+						{% endif %}
 					</tbody>
 				</table>
-				{% for cart in app.user.carts  %}
-					{% if cart.isActive == true %}
-						<form action="{{ path('payment_new', {'id': cart.id}) }}" method="get">
-							<button type="submit" class="btn btn-primary">Checkout</button>
-						</form>
-					{% endif %}
-				{% endfor %}
+				<div class="align-right p-i-r-md">
+					{% for cart in app.user.carts  %}
+						{% if cart.isActive == true %}
+							<form action="{{ path('payment_new', {'id': cart.id}) }}" method="get">
+								<button type="submit" class="btn btn-primary">Checkout</button>
+							</form>
+						{% endif %}
+					{% endfor %}
+				</div>
 			</div>
 
 		</div>
