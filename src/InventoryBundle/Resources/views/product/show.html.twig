@@ -8,15 +8,31 @@
 			</a>
 			<div class="r-panel-header p-sm">
 				<h2>{{ product.name }}</h2>
-				<img src="{{ asset('uploads/images/' ~ product.image) }}">
+				<div style="overflow: hidden">
+					<img src="{{ asset('uploads/images/' ~ product.image) }}">
+				</div>
 			</div>
 			<div class="r-panel-body container-fluid">
 				<div class="p-md">
 					<p>{{ product.description }}</p>
 				</div>
+				<div class="p-md align-right">
+					<p class="inline m-r-md"><strong>Price: </strong>{{ product.price }}</p>
+					<p class="inline"><strong>Available: </strong>{{ product.inventory ? product.inventory.quantity : '0' }}</p>
+				</div>
 			</div>
 			<div class="r-panel-footer">
 				<hr>
+				{% if product.inventory.quantity > 0 %}
+					<div class="m-t-sm">
+						{{ form_start(cart_item_form, {'action': path('cart_add_item', {'id': product.id}), 'method': 'POST'}, { 'attr' : { 'class': 'form-inline' } }) }}
+							{{ form_row(cart_item_form.quantity, {'attr': {'class': 'form-control', 'placeholder': 'Quantity'}}) }}
+							<button type="submit" class="btn btn-primary m-t-sm center" data-toggle="modal">Add to cart</button>
+						{{ form_end(cart_item_form) }}
+					</div>						
+				{% else %}
+					<h4>Out of stock</h4>
+				{% endif %}
 				{% if is_granted('ROLE_ADMIN') %}
 					<div class="float-left m-t-sm">
 						<a class="btn btn-primary inline" href="{{ path('product_edit', { 'id': product.id }) }}">
@@ -29,10 +45,6 @@
 						{{ form_end(delete_form) }}
 					</div>
 				{% endif %}
-				<div class="p-md align-right">
-					<p class="inline m-r-md"><strong>Price: </strong>{{ product.price }}</p>
-					<p class="inline"><strong>Available: </strong>{{ product.inventory ? product.inventory.quantity : '0' }}</p>
-				</div>
 			</div>
 		</div>
 	</div>

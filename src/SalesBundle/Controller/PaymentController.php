@@ -70,12 +70,8 @@ class PaymentController extends Controller
 	 */
 	public function createAction(Request $request, $id)
 	{
-        $payment = new Payment();
-		$form = $this->createForm('SalesBundle\Form\PaymentType', $payment);
-		$form->handleRequest($request);
-
 		$em = $this->getDoctrine()->getManager();
-
+		
 		$cart = $em->getRepository('SalesBundle:Cart')->find($id);
 		$total = 0;
 
@@ -83,10 +79,15 @@ class PaymentController extends Controller
 			$total += ($item->getQuantity() * $item->getProduct()->getPrice());
 		}
 
-		if ($form->isSubmitted() && $form->isValid()) {
-			$payment->setTotal($total);
+		$payment = new Payment();
+		$payment->setTotal($total);
 
-			$cart->setPayment($payment);
+		$form = $this->createForm('SalesBundle\Form\PaymentType', $payment);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+			
+			$payment->setCart($cart);
 			$cart->setIsActive(false);
 
 			$newCart = new Cart();
@@ -124,6 +125,7 @@ class PaymentController extends Controller
 		}
 
 		return array(
+			'id' => $id,
 			'total' => $total,
 			'payment' => $payment,
 			'form' => $form->createView(),

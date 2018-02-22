@@ -33,14 +33,10 @@ class ProductController extends Controller
 		$form = $this->createForm('SalesBundle\Form\CartItemType', $cartItem);
 
 		$products = $em->getRepository('InventoryBundle:Product')->findAll();
-
-		foreach ($products as $product) {
-			$forms[$product->getId()] = $form->createView();
-		}
+	
 
 		return array(
 			'products' => $products,
-			'form' => $forms,
 		);
 	}
 
@@ -91,15 +87,18 @@ class ProductController extends Controller
 	 * @Route("/{id}", name="product_show")
 	 * @Template("@Inventory/product/show.html.twig")
 	 * @Method("GET")
-	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function showAction(Product $product)
 	{
 		$form = $this->createDeleteForm($product);
 
+		$cartItem = new CartItem();
+		$cartItemForm = $this->createForm('SalesBundle\Form\CartItemType', $cartItem);
+
 		return array(
 			'product' => $product,
 			'delete_form' => $form->createView(),
+			'cart_item_form' => $cartItemForm->createView(),
 		);
 	}
 

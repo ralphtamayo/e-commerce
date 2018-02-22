@@ -34,7 +34,7 @@ class Cart
 	private $items;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="Payment", inversedBy="cart")
+	 * @ORM\OneToOne(targetEntity="Payment", mappedBy="cart")
 	 */
 	private $payment;
 
@@ -53,7 +53,7 @@ class Cart
 		return $this->id;
 	}
 
-	public function setUser(?User $user): self
+	public function setUser(User $user): self
 	{
 		$this->user = $user;
 
@@ -88,7 +88,7 @@ class Cart
         return $this;
 	}
 
-	public function setPayment(?Payment $payment): self
+	public function setPayment(Payment $payment): self
 	{
 		$this->payment = $payment;
 
@@ -105,7 +105,7 @@ class Cart
 		return $this->isActive;
 	}
 
-	public function setIsActive(?bool $isActive = true): self
+	public function setIsActive(bool $isActive = true): self
 	{
 		$this->isActive = $isActive;
 

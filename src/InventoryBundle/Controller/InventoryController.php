@@ -21,6 +21,7 @@ class InventoryController extends Controller
 	 * @Route("/", name="inventory_index")
 	 * @Template("@Inventory/inventory/index.html.twig")
 	 * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function indexAction()
 	{
@@ -50,8 +51,7 @@ class InventoryController extends Controller
             $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $isPersisted = $em->getRepository('InventoryBundle:Inventory')->findOneBy(['product' => $product]);
-            // var_dump($isPersisted === null);
-            // die;
+            
             if ($isPersisted === null) {
                 $inventory->setProduct($product);
                 $em->persist($inventory);

@@ -43,36 +43,36 @@ class CartController extends Controller
 	public function addItemAction(Request $request, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
-
+		
 		$user = $this->getUser();
 		$cart = $em->getRepository('SalesBundle:Cart')->findByUser($user->getId());
 		$product = $em->getRepository('InventoryBundle:Product')->find($id);
 		$inventory = $product->getInventory();
 
 		$cartItem = new CartItem();
+		$cartItem->setProduct($product);
+
 		$form = $this->createForm('SalesBundle\Form\CartItemType', $cartItem);
 		$form->handleRequest($request);
+		
+		if ($form->isSubmitted() && $form->isValid()) {
 
-		if ($form->getData()->getQuantity() > $product->getInventory()->getQuantity()) {
-			// $error = new FormError("Not enough quantity available");
-			// $form->get('quantity')->addError($error);
-			// return $this->generateUrl('product_index', array('form' => $form));
-			throw new Exception ('Not enough quantity available');
+			$inventory->deductQuantity($cartItem->getQuantity());
+			$em->persist($inventory);
+	
+			$cartItem->setCart($cart);
+
+			$em->persist($cartItem);
+			$em->flush();
 		}
 
-		$inventory->deductQuantity($cartItem->getQuantity());
-		$em->persist($inventory);
-
-		$cartItem->setProduct($product);
-		$cartItem->setCart($cart);
-
-		$em->persist($cartItem);
-		$em->flush();
-
-		$url = $this->generateUrl('product_index');
-		$response = new RedirectResponse($url);
-
-		return $response;
+		return $this->render(
+			'InventoryBundle:Product:show.html.twig',
+			array(
+				'product' => $product,
+				'cart_item_form' => $form->createView(),
+			)
+		);
 	}
 
 	/**
