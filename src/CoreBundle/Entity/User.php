@@ -53,6 +53,8 @@ class User extends BaseUser
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->carts = new ArrayCollection();
 	}
 
@@ -114,12 +116,23 @@ class User extends BaseUser
 		return $this->carts;
 	}
 
-	public function setCarts(DoctrineCollection $carts): self
+	public function setCarts(DoctrineCollection $carts = null): self
 	{
 		$this->carts = $carts;
 
 		foreach ($carts as $cart) {
 			$cart->setUser($this);
+		}
+
+		return $this;
+	}
+
+	public function addRole($role)
+	{
+		if (is_array($this->roles)) {
+			if (!in_array($role, $this->roles, true)) {
+				$this->roles[] = $role;
+			}
 		}
 
 		return $this;
