@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment / Show{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-4 mx-auto r-panel">
+			<div class="r-panel-header p-sm">
+				<h3>Payment Details</h3>
+			</div>
+			<div class="p-lg row">
+				<div class="col-md-10 mx-auto">
+					<p><label>Payment ID:</label> {{ payment.id }}</p>
+                    {% if payment.paymentMode == 'BDO' %}
+                        <p><label>Card Number:</label> {{ payment.cardNumber }}</p>
+                        <p><label>Expiration Date:</label> {{ payment.expirationDate|date("M, d Y") }}</p>
+                    {% elseif payment.paymentMode == 'Cebuana' %}
+    					<p><label>Reference Number:</label> {{ payment.referenceNumber }}</p>
+                    {% endif %}
+					<p><label>Address:</label> {{ payment.address }}</p>
+					<p><label>Contact:</label> {{ payment.contactDetails }}</p>
+				</div>
+			</div>
+			<div class="p-i-t-md text-center">
+                <a class="btn btn-primary" href="{{ path('cart_index', {'id': payment.cart.id}) }}">Back</a>
+			</div>
+		</div>
+	</div>
+{% endblock body %}

@@ -22,7 +22,23 @@ class PaymentController extends Controller
 {
 
 	/**
-	 * @Route("/{id}", name="payment_show")
+	 * @Route("/{id}", name="payment_index")
+	 * @Template("@Sales/payment/index.html.twig")
+	 * @Method("GET")
+	 */
+	public function indexAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$payment = $em->getRepository('SalesBundle:Payment')->find($id);
+
+		return array(
+			'payment' => $payment,
+		);
+	}
+
+	/**
+	 * @Route("/{id}/show", name="payment_show")
 	 * @Template("@Sales/payment/show.html.twig")
 	 * @Method("GET")
 	 * @Security("has_role('ROLE_USER')")

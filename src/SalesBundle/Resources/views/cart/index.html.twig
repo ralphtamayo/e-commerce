@@ -13,6 +13,9 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
+							{% if is_granted('ROLE_ADMIN') %}
+								<th scope="col">Payment ID</th>
+							{% endif %}
 							<th scope="col">Product</th>
 							<th scope="col">Quantity</th>
 							<th scope="col">Price</th>
@@ -29,6 +32,9 @@
 						{% if cart.items|length > 0 %}
 							{% for item in cart.items %}
 								<tr>
+									{% if is_granted('ROLE_ADMIN') %}
+										<td><a href="{{ path('payment_index', {'id': cart.payment.id}) }}">{{ cart.payment.id }}</a></td>
+									{% endif %}
 									<td>{{ item.product.name }}</td>
 									<td>{{ item.quantity }}</td>
 									<td>{{ item.product.price | number_format(2)}}</td>

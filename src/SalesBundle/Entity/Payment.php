@@ -181,6 +181,18 @@ class Payment
 		}
 
 		if ($this->getPaymentMode() === self::PAYMENT_MODE_BDO) {
+			$today = date("Y-m-d");
+			$expire = $this->getExpirationDate();
+
+			$today_dt = new \DateTime($today);
+			$expire_dt = new \DateTime($expire->format("Y-m-d"));
+
+			if ($expire_dt < $today_dt) {
+				$context->buildViolation('Expiration Date must be one day onwards')
+					->atPath('expirationDate')
+					->addViolation();
+			}
+
 			if ($this->getCardNumber() === null) {
 				$context->buildViolation('Card Number cannot be blank.')
 				->atPath('cardNumber')
@@ -200,17 +212,6 @@ class Payment
 				->atPath('referenceNumber')
 				->addViolation();
 			}
-		}
-		$today = date("Y-m-d");
-		$expire = $this->getExpirationDate();
-
-		$today_dt = new \DateTime($today);
-		$expire_dt = new \DateTime($expire->format("Y-m-d"));
-
-		if ($expire_dt < $today_dt) {
-			$context->buildViolation('Expiration Date must be one day onwards')
-				->atPath('expirationDate')
-				->addViolation();
 		}
 	}
 }
