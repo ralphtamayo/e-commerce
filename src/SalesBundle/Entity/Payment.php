@@ -60,6 +60,18 @@ class Payment
 	 */
    private $total;
 
+   /**
+	 * @ORM\Column(type="string", nullable=false)
+	 * @Assert\NotBlank(message="Address cannot be blank.")
+	 */
+	private $address;
+
+	/**
+	 * @ORM\Column(type="string", nullable=false)
+	 * @Assert\NotBlank(message="Contact Details cannot be blank.")
+	 */
+	private $contactDetails;
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -149,15 +161,67 @@ class Payment
 		return $this->total;
 	}
 
+	public function setAddress(?string $address = null): self
+	{
+		$this->address = $address;
+
+		return $this;
+	}
+
+	public function getAddress(): ?string
+	{
+		return $this->address;
+	}
+
+	public function setContactDetails(?string $contactDetails = null): self
+	{
+		$this->contactDetails = $contactDetails;
+
+		return $this;
+	}
+
+	public function getContactDetails(): ?string
+	{
+		return $this->contactDetails;
+	}
+
 	/**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context, $payload)
-    {
-        if ($this->getTotal() <= 0) {
-            $context->buildViolation('Total must be greater than 0. Please add item to cart first.')
-                ->atPath('expirationYear')
-                ->addViolation();
-        }
-    }
+	 * @Assert\Callback
+	 */
+	public function validate(ExecutionContextInterface $context, $payload)
+	{
+		if ($this->getTotal() <= 0) {
+			$context->buildViolation('Total must be greater than 0. Please add item to cart first.')
+				->atPath('expirationYear')
+				->addViolation();
+		}
+
+		if ($this->getPaymentMode() === self::PAYMENT_MODE_BDO) {
+			if ($this->getCardNumber() === null) {
+				$context->buildViolation('Card Number cannot be blank.')
+				->atPath('cardNumber')
+				->addViolation();
+			}
+
+			if ($this->getExpirationMonth() === null) {
+				$context->buildViolation('Expiration Month cannot be blank.')
+				->atPath('expirationMonth')
+				->addViolation();
+			}
+
+			if ($this->getExpirationYear() === null) {
+				$context->buildViolation('Expiration Year cannot be blank.')
+				->atPath('expirationYear')
+				->addViolation();
+			}
+		}
+
+		if ($this->getPaymentMode() === self::PAYMENT_MODE_CEBUANA) {
+			if ($this->getReferenceNumber() === null) {
+				$context->buildViolation('Reference Number cannot be blank.')
+				->atPath('referenceNumber')
+				->addViolation();
+			}
+		}
+	}
 }

@@ -44,7 +44,10 @@ class PaymentController extends Controller
 	 */
 	public function newAction($id)
 	{
-        $payment = new Payment();
+		$payment = new Payment();
+		$payment->setAddress($this->getUser()->getAddress());
+		$payment->setContactDetails($this->getUser()->getContactDetails());
+
 		$form = $this->createForm('SalesBundle\Form\PaymentType', $payment);
 
 		$em = $this->getDoctrine()->getManager();
@@ -81,6 +84,8 @@ class PaymentController extends Controller
 
 		$payment = new Payment();
 		$payment->setTotal($total);
+		$payment->setAddress($this->getUser()->getAddress());
+		$payment->setContactDetails($this->getUser()->getContactDetails());
 
 		$form = $this->createForm('SalesBundle\Form\PaymentType', $payment);
 		$form->handleRequest($request);
