@@ -3373,6 +3373,10 @@ hr {
   display: inline-block;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 body {
   color: #636d77;
   font-family: 'Roboto', sans-serif;
@@ -3384,33 +3388,8 @@ label {
   font-weight: 400;
 }
 
-.btn {
-  height: 40px;
-  color: #FFFFFF;
-}
-
-.btn:hover {
-  color: #FFFFFF;
-}
-
 .btn-block {
   width: 100%;
-}
-
-.btn-danger {
-  background: #FF5055;
-}
-
-.btn-danger:hover {
-  background: #cc3d3f;
-}
-
-.btn-primary {
-  background: #02A3C4;
-}
-
-.btn-primary:hover {
-  background: #068E92;
 }
 
 .form-box {
@@ -3426,11 +3405,26 @@ label {
 
 .r-panel {
   background: #FFFFFF;
+  padding: 0px;
 }
 
 .r-panel .r-panel-header {
   border-bottom: 1px solid #eaeaea;
+  position: relative;
   text-align: center;
+}
+
+.r-panel .r-panel-header .r-l-toolbox,
+.r-panel .r-panel-header .r-r-toolbox {
+  position: absolute;
+}
+
+.r-panel .r-panel-header .r-l-toolbox {
+  left: 0;
+}
+
+.r-panel .r-panel-header .r-r-toolbox {
+  right: 0;
 }
 
 .r-panel .r-panel-body {
@@ -3459,6 +3453,29 @@ label {
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 3;
+}
+
+.image-container,
+.image-container2 {
+  overflow: hidden;
+  position: relative;
+}
+
+.image-container img,
+.image-container2 img {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  margin: auto;
+}
+
+.image-container {
+  height: 30vh;
+}
+
+.image-container2 {
+  height: 40vh;
 }
 
 body {

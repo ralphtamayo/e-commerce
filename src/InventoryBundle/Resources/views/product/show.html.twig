@@ -3,16 +3,38 @@
 {% block body %}
 	<div class="row">
 		<div class="col-md-6 mx-auto r-panel">
-			<a class="btn btn-primary float-left m-t-sm" href="{{ path('product_index') }}">
-				<i class="fa fa-angle-left"></i>
-			</a>
-			<div class="r-panel-header p-sm">
-				<h2>{{ product.name }}</h2>
-				<div style="overflow: hidden">
+			{% if product.image %}
+				<div class="image-container2">
 					<img src="{{ asset('uploads/images/' ~ product.image) }}">
 				</div>
+			{% endif %}
+			<div class="r-panel-header p-sm">
+				<a class="btn btn-danger btn-sm m-l-sm r-l-toolbox" href="{{ path('product_index') }}">
+					<i class="fa fa-angle-left m-r-xs"></i> Back
+				</a>
+				{% if is_granted('ROLE_ADMIN') %}
+					<div class="btn-group m-r-sm r-r-toolbox">
+						<button type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fa fa-cog"></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a class="dropdown-item" href="{{ path('inventory_new', { 'id': product.id }) }}">
+								<i class="fa fa-plus m-r-sm"></i> Add stock
+							</a>
+							<a class="dropdown-item" href="{{ path('product_edit', { 'id': product.id }) }}">
+								<i class="fa fa-edit m-r-xs"></i> Edit
+							</a>
+							{{ form_start(delete_form) }}
+								<button class="dropdown-item" type="submit">
+									<i class="fa fa-trash m-r-sm"></i> Delete
+								</button>
+							{{ form_end(delete_form) }}
+						</div>
+					</div>
+				{% endif %}
+				<h3>{{ product.name }}</h3>
 			</div>
-			<div class="r-panel-body container-fluid">
+			<div class="r-panel-body">
 				<div class="p-md">
 					<p>{{ product.description }}</p>
 				</div>
@@ -21,29 +43,20 @@
 					<p class="inline"><strong>Available: </strong>{{ product.inventory ? product.inventory.quantity : '0' }}</p>
 				</div>
 			</div>
-			<div class="r-panel-footer">
-				<hr>
+			<hr>
+			<div class="r-panel-footer p-sm">
 				{% if product.inventory.quantity > 0 %}
-					<div class="m-t-sm">
-						{{ form_start(cart_item_form, {'action': path('cart_add_item', {'id': product.id}), 'method': 'POST'}, { 'attr' : { 'class': 'form-inline' } }) }}
-							{{ form_row(cart_item_form.quantity, {'attr': {'class': 'form-control', 'placeholder': 'Quantity'}}) }}
-							<button type="submit" class="btn btn-primary m-t-sm center" data-toggle="modal">Add to cart</button>
-						{{ form_end(cart_item_form) }}
-					</div>						
+					<h6 class="inline p-sm">Add to cart</h6>
+					{{ form_start(cart_item_form, {'action': path('cart_add_item', {'id': product.id}), 'method': 'POST', 'attr' : { 'class': 'form-inline float-right'}}) }}
+						<div class="form-group mx-sm-3 mb-2">
+							{{ form_widget(cart_item_form.quantity, {'attr': {'class': 'form-control', 'placeholder': 'Quantity'}}) }}
+						</div>
+						<button type="submit" class="btn btn-primary mb-2">
+							<i class="fa fa-cart-arrow-down"></i>
+						</button>
+					{{ form_end(cart_item_form) }}			
 				{% else %}
 					<h4>Out of stock</h4>
-				{% endif %}
-				{% if is_granted('ROLE_ADMIN') %}
-					<div class="float-left m-t-sm">
-						<a class="btn btn-primary inline" href="{{ path('product_edit', { 'id': product.id }) }}">
-							<i class="fa fa-edit"></i>
-						</a>
-						{{ form_start(delete_form, {'attr': {'class': 'inline'}}) }}
-							<button class="btn btn-danger" type="submit" value="Delete">
-								<i class="fa fa-trash"></i>
-							</button>
-						{{ form_end(delete_form) }}
-					</div>
 				{% endif %}
 			</div>
 		</div>
