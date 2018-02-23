@@ -46,14 +46,14 @@ class Inventory
 
 	public function addQuantity(?string $quantity): self
 	{
-		$this->quantity += $quantity;
+		$this->quantity += round($quantity);
 
 		return $this;
 	}
 
 	public function deductQuantity(?string $quantity): self
 	{
-		$this->quantity -= $quantity;
+		$this->quantity -= round($quantity);
 
 		return $this;
 	}
