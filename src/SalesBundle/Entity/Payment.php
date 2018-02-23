@@ -201,9 +201,13 @@ class Payment
 				->addViolation();
 			}
 		}
-		$date = new \DateTime('now');
-		dump($this->getExpirationDate()->diff($date)->d);
-		if ( $this->getExpirationDate()->diff($date)->d <= 0 ) {
+		$today = date("Y-m-d");
+		$expire = $this->getExpirationDate();
+
+		$today_dt = new \DateTime($today);
+		$expire_dt = new \DateTime($expire->format("Y-m-d"));
+
+		if ($expire_dt < $today_dt) {
 			$context->buildViolation('Expiration Date must be one day onwards')
 				->atPath('expirationDate')
 				->addViolation();
