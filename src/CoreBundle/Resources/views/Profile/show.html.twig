@@ -1,3 +1,27 @@
-{% block fos_user_content %}
-{% include "@FOSUser/Profile/show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile / Edit{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-4 mx-auto r-panel">
+			<div class="r-panel-header p-sm">
+				<h3>User Profile</h3>
+			</div>
+			<div class="p-lg row">
+				<div class="col-md-10 mx-auto">
+					<p><label>Username:</label> {{ user.username }}</p>
+					<p><label>Email:</label> {{ user.email }}</p>
+					<p><label>First name:</label> {{ user.firstName }}</p>
+					<p><label>Last name:</label> {{ user.lastName }}</p>
+					<p><label>Address:</label> {{ user.address }}</p>
+					<p><label>Contact:</label> {{ user.contactDetails }}</p>
+				</div>
+			</div>
+			<div class="p-i-t-md text-center">
+				<a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}">Edit Profile</a>
+				<a class="btn btn-primary" href="{{ path('fos_user_change_password') }}">Change Password </a>
+			</div>
+		</div>
+	</div>
+{% endblock body %}
