@@ -36,6 +36,22 @@ class CartController extends Controller
 	}
 
 	/**
+	 * @Route("/orders/{id}", name="cart_listing")
+	 * @Template("@Sales/cart/listing.html.twig")
+	 * @Method("GET")
+	 */
+	public function listingAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$carts = $em->getRepository('SalesBundle:Cart')->loadAll();
+
+		return array(
+			'carts' => $carts,
+		);
+	}
+
+	/**
 	 * @Route("/add/{id}", name="cart_add_item")
 	 * @Method("POST")
      * @Security("has_role('ROLE_USER')")

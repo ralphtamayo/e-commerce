@@ -21,6 +21,19 @@ class CartRepository extends EntityRepository
 		return $qb->getQuery()->getOneOrNullResult();
 	}
 
+	public function loadAll()
+	{
+		$qb = $this->createQueryBuilder('cart')
+			->select('cart', 'user', 'cart_item', 'product')
+			->join('cart.user', 'user')
+			->join('cart.items', 'cart_item')
+			->join('cart_item.product', 'product')
+			->andWhere('cart.isActive = 0')
+		;
+
+		return $qb->getQuery()->getResult();
+	}
+
 	public function findByUser($id)
 	{
 		$qb = $this->createQueryBuilder('cart')

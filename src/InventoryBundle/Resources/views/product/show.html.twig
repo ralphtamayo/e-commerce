@@ -44,21 +44,23 @@
 				</div>
 			</div>
 			<hr>
-			<div class="r-panel-footer p-sm">
-				{% if product.inventory.quantity > 0 %}
-					<h6 class="inline p-sm">Add to cart</h6>
-					{{ form_start(cart_item_form, {'action': path('cart_add_item', {'id': product.id}), 'method': 'POST', 'attr' : { 'class': 'form-inline float-right'}}) }}
-						<div class="form-group mx-sm-3 mb-2">
-							{{ form_widget(cart_item_form.quantity, {'attr': {'class': 'form-control', 'placeholder': 'Quantity'}}) }}
-						</div>
-						<button type="submit" class="btn btn-primary mb-2">
-							<i class="fa fa-cart-arrow-down"></i>
-						</button>
-					{{ form_end(cart_item_form) }}			
-				{% else %}
-					<h4>Out of stock</h4>
-				{% endif %}
-			</div>
+			{% if is_granted('ROLE_ADMIN') == false %}
+				<div class="r-panel-footer p-sm">
+					{% if product.inventory.quantity > 0 %}
+						<h6 class="inline p-sm">Add to cart</h6>
+						{{ form_start(cart_item_form, {'action': path('cart_add_item', {'id': product.id}), 'method': 'POST', 'attr' : { 'class': 'form-inline float-right'}}) }}
+							<div class="form-group mx-sm-3 mb-2">
+								{{ form_widget(cart_item_form.quantity, {'attr': {'class': 'form-control', 'placeholder': 'Quantity'}}) }}
+							</div>
+							<button type="submit" class="btn btn-primary mb-2">
+								<i class="fa fa-cart-arrow-down"></i>
+							</button>
+						{{ form_end(cart_item_form) }}			
+					{% else %}
+						<h4>Out of stock</h4>
+					{% endif %}
+				</div>
+			{% endif %}
 		</div>
 	</div>
 		
