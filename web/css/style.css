@@ -3509,4 +3509,16 @@ a:hover {
 .content {
   padding: 25px;
 }
+
+.navbar-brand {
+  font-weight: 400;
+}
+
+.navbar-brand .navbar-logo {
+  height: 30px;
+}
+
+.logo {
+  width: 10vw;
+}
 /*# sourceMappingURL=style.css.map */
