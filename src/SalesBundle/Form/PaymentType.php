@@ -19,6 +19,7 @@ class PaymentType extends AbstractType
 				'choices' => array(
 					Payment::PAYMENT_MODE_BDO => Payment::PAYMENT_MODE_BDO,
 					Payment::PAYMENT_MODE_CEBUANA => Payment::PAYMENT_MODE_CEBUANA,
+					Payment::PAYMENT_MODE_COD => Payment::PAYMENT_MODE_COD,
 				),
 			))
 			->add('cardNumber', Type\TextType::class)

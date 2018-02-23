@@ -17,6 +17,7 @@ class Payment
 {
 	const PAYMENT_MODE_BDO = 'BDO';
 	const PAYMENT_MODE_CEBUANA = 'Cebuana';
+	const PAYMENT_MODE_COD = 'Cash On Delivery (COD)';
 	
 	/**
 	 * @ORM\Column(type="integer")

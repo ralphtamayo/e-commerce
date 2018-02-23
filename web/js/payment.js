@@ -17,12 +17,18 @@ $(document).ready(function(){
 			$('#salesbundle_payment_expirationYear').parent().show();
 
 			$('#salesbundle_payment_referenceNumber').parent().hide();
-		} else {
+		} else if (paymentMode == 'Cebuana') {
 			$('#salesbundle_payment_referenceNumber').parent().show();
 
 			$('#salesbundle_payment_cardNumber').parent().hide();
 			$('#salesbundle_payment_expirationMonth').parent().hide();
 			$('#salesbundle_payment_expirationYear').parent().hide();
+		} else {
+			$('#salesbundle_payment_cardNumber').parent().hide();
+			$('#salesbundle_payment_expirationMonth').parent().hide();
+			$('#salesbundle_payment_expirationYear').parent().hide();
+			
+			$('#salesbundle_payment_referenceNumber').parent().hide();
 		}
 	}
 })
