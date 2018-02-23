@@ -52,6 +52,7 @@ class CartController extends Controller
 		$cartItem = new CartItem();
 		$cartItem->setProduct($product);
 
+		$deleteForm = $this->createDeleteForm($product);
 		$form = $this->createForm('SalesBundle\Form\CartItemType', $cartItem);
 		$form->handleRequest($request);
 		
@@ -67,9 +68,10 @@ class CartController extends Controller
 		}
 
 		return $this->render(
-			'InventoryBundle:Product:show.html.twig',
+			'InventoryBundle:product:show.html.twig',
 			array(
 				'product' => $product,
+				'delete_form' => $deleteForm->createView(),
 				'cart_item_form' => $form->createView(),
 			)
 		);
@@ -102,5 +104,14 @@ class CartController extends Controller
 		$response = new RedirectResponse($url);
 
 		return $response;
+	}
+
+	private function createDeleteForm($product)
+	{
+		return $this->createFormBuilder()
+			->setAction($this->generateUrl('product_delete', array('id' => $product->getId())))
+			->setMethod('DELETE')
+			->getForm()
+		;
 	}
 }
