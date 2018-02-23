@@ -32,7 +32,7 @@
 						<button class="btn btn-primary btn-block" type="submit">Edit</button>
 					</div>
 					<div class="col-md-12 form-group">
-						<a href="{{ path('product_index') }}" class="btn btn-block btn-danger">Cancel</a>
+						<a href="{{ path('product_show', { 'id': product.id }) }}" class="btn btn-block btn-danger">Cancel</a>
 					</div>
 				{{ form_end(edit_form) }}
 			</div>
