@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Flowershop / About{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-6 mx-auto r-panel">
+			<div class="r-panel-header p-sm">
+				<h2>Flowershop</h2>
+			</div>
+			<div class="r-panel-body container-fluid">
+				<img class="logo m-md" src="{{ asset('logo.png') }}"/>
+				<div class="p-i-t-lg">
+					<h5 class="m-b-md"><q>Every flower is a soul blossoming in nature</q></h5>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Cras et mattis tellus. Ut commodo sem quis justo rhoncus faucibus.
+					Praesent placerat consequat purus vitae venenatis.
+					Nulla placerat dictum arcu, nec dignissim ex auctor quis.
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Ut condimentum lectus erat, nec faucibus elit dictum scelerisque.
+					Maecenas viverra turpis ac finibus luctus. Sed laoreet turpis nulla,
+					ac sollicitudin lectus cursus vel. Cras molestie mauris nunc, quis fringilla quam elementum ac.
+					Donec molestie pretium tellus gravida consequat.
+					Vestibulum libero nisl, pellentesque in nunc eu, facilisis dignissim magna.</p>
+				</div>
+				<div class="contact-us text-center p-b-md">
+					<h5 class="m-b-sm">Contact us</h5>
+					<hr>
+					<div class="row">
+						<div class="col-md-4">
+							<a class="m-sm" href="#">
+								<h4>
+									<i class="fa fa-facebook-f"></i>
+								</h4>
+							</a>
+							<small>flowershop</small>
+						</div>
+						<div class="col-md-4">
+							<a class="m-sm" href="#">
+								<h4>
+									<i class="fa fa-twitter"></i>
+								</h4>
+							</a>
+							<small>flowershop</small>
+						</div>
+						<div class="col-md-4">
+							<a class="m-sm" href="#">
+								<h4>
+									<i class="fa fa-envelope"></i>
+								</h4>
+							</a>
+							<small>flowershop</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock body %}

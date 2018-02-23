@@ -116,13 +116,9 @@ class User extends BaseUser
 		return $this->carts;
 	}
 
-	public function setCarts(DoctrineCollection $carts = null): self
+	public function setCarts($carts = null): self
 	{
 		$this->carts = $carts;
-
-		foreach ($carts as $cart) {
-			$cart->setUser($this);
-		}
 
 		return $this;
 	}
