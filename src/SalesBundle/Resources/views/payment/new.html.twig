@@ -34,6 +34,16 @@
 						{{ form_errors(form.referenceNumber) }}
 					</div>
 					<div class="col-md-12 form-group">
+						{{ form_label(form.address) }}
+						{{ form_widget(form.address, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.address) }}
+					</div>
+					<div class="col-md-12 form-group">
+						{{ form_label(form.contactDetails) }}
+						{{ form_widget(form.contactDetails, {'attr': {'class': 'form-box'}}) }}
+						{{ form_errors(form.contactDetails) }}
+					</div>
+					<div class="col-md-12 form-group">
 						<label>Total: </label>
 						<p>{{ total | number_format(2) }}</p>
 					</div>

@@ -5,6 +5,8 @@ namespace SalesBundle\Form;
 use SalesBundle\Entity\Payment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +25,14 @@ class PaymentType extends AbstractType
 			->add('expirationMonth', Type\TextType::class)
 			->add('expirationYear', Type\TextType::class)
 			->add('referenceNumber', Type\TextType::class)
+			->add('address', TextAreaType::class, array(
+				'required' => true,
+				'disabled' => true,
+			))
+			->add('contactDetails', TextType::class, array(
+				'required' => true,
+				'disabled' => true,
+			))
 		;
 	}
 
