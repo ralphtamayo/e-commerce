@@ -4,20 +4,32 @@
 	<div class="row">
 		<div class="col-md-12 r-panel">
 			<div class="r-panel-header p-sm">
+				{% if is_granted('ROLE_ADMIN') %}
+					<div class="r-r-toolbox m-r-sm">
+						<a class="btn btn-primary" href="{{ path('product_new') }}">
+							<i class="fa fa-plus m-r-sm"></i>
+							New product
+						</a>
+					</div>
+				{% endif %}
 				<h2>Product list</h2>
 			</div>
 
 			<div class="r-panel-body container-fluid">
-				<div class="row product-list m-t-md">
+				<div class="row product-list p-b-lg p-t-lg p-r-sm p-l-sm">
 					{% for product in products %}
 						<div class="col-xs-2 col-md-3">
 							<div class="product">
+								{% if product.image %}
+									<a href="{{ path('product_show', { 'id': product.id }) }}">
+										<div class="image-container">
+											<img src="{{ asset('uploads/images/' ~ product.image) }}">
+										</div>
+									</a>
+								{% endif %}
 								<h5 class="p-sm">
 									<a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.name }}</a>
 								</h5>
-								<div style="overflow: hidden">
-									<img src="{{ asset('uploads/images/' ~ product.image) }}">
-								</div>
 								<hr>
 								<div class="product-details p-sm">
 									<p class="product-description">{{ product.description }}</p>
@@ -28,11 +40,6 @@
 						</div>
 					{% endfor %}
 				</div>
-				{% if is_granted('ROLE_ADMIN') %}
-					<div class="align-right p-i-l-md">
-						<a class="btn btn-primary" href="{{ path('product_new') }}">Create a new product</a>
-					</div>
-				{% endif %}
 			</div>
 		</div>
 	</div>
