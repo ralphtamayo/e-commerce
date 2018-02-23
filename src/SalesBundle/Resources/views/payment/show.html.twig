@@ -1,5 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ payment.paymentMode }}
-{% endblock body %}
+	<div class="row">
+		<div class="col-md-4 mx-auto r-panel">
+			<div class="r-panel-header p-sm">
+				<h1 class="label label-succes">Success!</h1>
+			</div>
+			<div class="r-panel-body container-fluid">
+					<div class="p-lg">
+						<h5>The order has successfully paid, go to <a href="{{ path('product_index') }}">products</a> now!</h3>
+					</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
