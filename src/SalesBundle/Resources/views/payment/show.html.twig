@@ -2,18 +2,15 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-md-6 mx-auto r-panel">
+		<div class="col-md-4 mx-auto r-panel">
 			<div class="r-panel-header p-sm">
-				<h3>Payment #{{ payment.id }}</h3>
+				<h1 class="label label-succes">Success!</h1>
 			</div>
 			<div class="r-panel-body container-fluid">
-				<div class="row p-md">
-					<div class="col-md-12 form-group">
-						<label>Order</label>
-						Order #{{ payment.cart.id }}
+					<div class="p-lg">
+						<h5>The order has successfully paid, go to <a href="{{ path('product_index') }}">products</a> now!</h3>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>
-{% endblock body %}
+{% endblock %}
