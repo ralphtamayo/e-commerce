@@ -37,14 +37,9 @@ class Payment
 	private $cardNumber;
 
 	/**
-	 * @ORM\Column(name="expirationMonth", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="expirationDate", type="date")
 	 */
-	private $expirationMonth;
-
-	/**
-	 * @ORM\Column(name="expirationYear", type="string", length=255, nullable=true)
-	 */
-	private $expirationYear;
+	private $expirationDate;
 
 	/**
 	 * @ORM\Column(name="referenceNumber", type="string", length=255, nullable=true)
@@ -114,28 +109,16 @@ class Payment
 		return $this->cardNumber;
 	}
 
-	public function setExpirationMonth(?string $expirationMonth = null): self
+	public function getExpirationDate(): ?\DateTime
 	{
-		$this->expirationMonth = $expirationMonth;
+		return $this->expirationDate;
+	}
+
+	public function setExpirationDate($expirationDate): self
+	{
+		$this->expirationDate = $expirationDate;
 
 		return $this;
-	}
-
-	public function getExpirationMonth(): ?string
-	{
-		return $this->expirationMonth;
-	}
-
-	public function setExpirationYear(?string $expirationYear = null): self
-	{
-		$this->expirationYear = $expirationYear;
-
-		return $this;
-	}
-
-	public function getExpirationYear(): ?string
-	{
-		return $this->expirationYear;
 	}
 
 	public function setReferenceNumber(?string $referenceNumber = null): self
@@ -204,15 +187,9 @@ class Payment
 				->addViolation();
 			}
 
-			if ($this->getExpirationMonth() === null) {
-				$context->buildViolation('Expiration Month cannot be blank.')
+			if ($this->getExpirationDate() === null) {
+				$context->buildViolation('Expiration Date cannot be blank.')
 				->atPath('expirationMonth')
-				->addViolation();
-			}
-
-			if ($this->getExpirationYear() === null) {
-				$context->buildViolation('Expiration Year cannot be blank.')
-				->atPath('expirationYear')
 				->addViolation();
 			}
 		}
@@ -223,6 +200,13 @@ class Payment
 				->atPath('referenceNumber')
 				->addViolation();
 			}
+		}
+		$date = new \DateTime('now');
+		dump($this->getExpirationDate()->diff($date)->d);
+		if ( $this->getExpirationDate()->diff($date)->d <= 0 ) {
+			$context->buildViolation('Expiration Date must be one day onwards')
+				->atPath('expirationDate')
+				->addViolation();
 		}
 	}
 }

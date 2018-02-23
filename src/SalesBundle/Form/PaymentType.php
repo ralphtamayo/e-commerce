@@ -23,8 +23,7 @@ class PaymentType extends AbstractType
 				),
 			))
 			->add('cardNumber', Type\TextType::class)
-			->add('expirationMonth', Type\TextType::class)
-			->add('expirationYear', Type\TextType::class)
+			->add('expirationDate', Type\DateType::class)
 			->add('referenceNumber', Type\TextType::class)
 			->add('address', TextAreaType::class, array(
 				'required' => true,

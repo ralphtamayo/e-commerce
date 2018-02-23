@@ -2,7 +2,7 @@
 <p><strong>Payment Mode: </strong>{{ payment.paymentMode }}</p>
 {% if payment.paymentMode == 'BDO' %}
 	<p><strong>Card Number: </strong>{{ payment.cardNumber }}</p>
-	<p><strong>Expiration: </strong>{{ payment.expirationMonth }}/{{ payment.expirationYear }}</p>
+	<p><strong>Expiration: </strong>{{ payment.expirationDate | date("M,d Y") }}</p>
 {% elseif payment.paymentMode == 'Cebuana' %}
 	<p><strong>Reference Number: </strong>{{ payment.referenceNumber }}</p>
 {% endif %}

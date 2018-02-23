@@ -13,20 +13,17 @@ $(document).ready(function(){
 	{
 		if (paymentMode == 'BDO') {
 			$('#salesbundle_payment_cardNumber').parent().show();
-			$('#salesbundle_payment_expirationMonth').parent().show();
-			$('#salesbundle_payment_expirationYear').parent().show();
+			$('#salesbundle_payment_expirationDate').parent().show();
 
 			$('#salesbundle_payment_referenceNumber').parent().hide();
 		} else if (paymentMode == 'Cebuana') {
 			$('#salesbundle_payment_referenceNumber').parent().show();
 
 			$('#salesbundle_payment_cardNumber').parent().hide();
-			$('#salesbundle_payment_expirationMonth').parent().hide();
-			$('#salesbundle_payment_expirationYear').parent().hide();
+			$('#salesbundle_payment_expirationDate').parent().hide();
 		} else {
 			$('#salesbundle_payment_cardNumber').parent().hide();
-			$('#salesbundle_payment_expirationMonth').parent().hide();
-			$('#salesbundle_payment_expirationYear').parent().hide();
+			$('#salesbundle_payment_expirationDate').parent().hide();
 			
 			$('#salesbundle_payment_referenceNumber').parent().hide();
 		}
