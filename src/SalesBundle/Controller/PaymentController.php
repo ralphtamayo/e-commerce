@@ -110,8 +110,8 @@ class PaymentController extends Controller
 
 			$message = \Swift_Message::newInstance()
 				->setSubject('Flowershop Order Numer: ' . $cart->getId())
-				->setFrom('ralphtamayo@creatinginfo.com')
-				->setTo('tamayoralph24@gmail.com')
+				->setFrom($this->getParameter('mailer_user'))
+				->setTo($this->getUser()->getEmail())
 				->setBody(
 					$this->renderView(
 						'email\e-mail.html.twig',
