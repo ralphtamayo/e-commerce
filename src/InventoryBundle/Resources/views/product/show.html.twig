@@ -18,10 +18,16 @@
 							<i class="fa fa-cog"></i>
 						</button>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a class="dropdown-item" href="{{ path('inventory_new', { 'id': product.id }) }}">Add stock</a>
-							<a class="dropdown-item" href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>
+							<a class="dropdown-item" href="{{ path('inventory_new', { 'id': product.id }) }}">
+								<i class="fa fa-plus m-r-sm"></i> Add stock
+							</a>
+							<a class="dropdown-item" href="{{ path('product_edit', { 'id': product.id }) }}">
+								<i class="fa fa-edit m-r-xs"></i> Edit
+							</a>
 							{{ form_start(delete_form) }}
-								<button class="dropdown-item" type="submit">Delete</button>
+								<button class="dropdown-item" type="submit">
+									<i class="fa fa-trash m-r-sm"></i> Delete
+								</button>
 							{{ form_end(delete_form) }}
 						</div>
 					</div>
