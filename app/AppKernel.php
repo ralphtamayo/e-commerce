@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new CoreBundle\CoreBundle(),
             new InventoryBundle\InventoryBundle(),
             new SalesBundle\SalesBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
