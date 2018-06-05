@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
+use CoreBundle\Utils\GeneratingUtils;
 
 /**
  * Product controller.
@@ -106,7 +107,7 @@ class ProductController extends BaseController
 		if ($editForm->isSubmitted() && $editForm->isValid()) {
 			$file = $product->getImage();
 
-			$fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+			$fileName = GeneratingUtils::generateUniqueFileName().'.'.$file->guessExtension();
 
 			// moves the file to the directory where brochures are stored
 			$file->move(

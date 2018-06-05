@@ -6,6 +6,7 @@ use CoreBundle\Model\BaseModel;
 use InventoryBundle\Entity\Inventory;
 use InventoryBundle\Entity\Product;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use CoreBundle\Utils\GeneratingUtils;
 
 class ProductModel extends BaseModel
 {
@@ -22,7 +23,7 @@ class ProductModel extends BaseModel
 	{
 		$file = $product->getImage();
 
-		$fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+		$fileName = GeneratingUtils::generateUniqueFileName().'.'.$file->guessExtension();
 
 		$file->move(
 			$this->container->getParameter('images_directory'),
@@ -39,10 +40,5 @@ class ProductModel extends BaseModel
 		$this->em->persist($product);
 
 		$this->em->flush();
-	}
-
-	private function generateUniqueFileName()
-	{
-		return md5(uniqid());
 	}
 }
