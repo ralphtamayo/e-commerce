@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Product
+ * Product.
  *
  * @ORM\Table(name="inventory_product")
  * @ORM\Entity(repositoryClass="InventoryBundle\Repository\ProductRepository")
@@ -22,6 +22,7 @@ class Product
 
 	/**
 	 * @ORM\Column(name="name", type="string", length=255)
+	 * @Assert\NotBlank(message="Name must not be blank.")
 	 */
 	private $name;
 
@@ -37,6 +38,7 @@ class Product
 
 	/**
 	 * One Product has One Inventory.
+	 *
 	 * @ORM\OneToOne(targetEntity="Inventory", mappedBy="product")
 	 */
 	private $inventory;

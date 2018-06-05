@@ -8,16 +8,15 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadUserData implements FixtureInterface
 {
-
 	public function load(ObjectManager $manager)
 	{
-        $userAdmin = new User();
-        
+		$userAdmin = new User();
+
 		$userAdmin->setUsername('admin');
 		$userAdmin->setEmail('admin@ecommerce.com');
 		$userAdmin->setPlainPassword('admin');
 		$userAdmin->setEnabled(true);
-		$userAdmin->setRoles(array('ROLE_ADMIN'));
+		$userAdmin->setRoles(['ROLE_ADMIN']);
 		$userAdmin->setFirstName('admin');
 		$userAdmin->setLastName('admin');
 		$userAdmin->setAddress('Manila City');

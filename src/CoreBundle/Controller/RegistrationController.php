@@ -2,14 +2,14 @@
 
 namespace CoreBundle\Controller;
 
-use SalesBundle\Entity\Cart;
-use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\FOSUserEvents;
+use SalesBundle\Entity\Cart;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use Symfony\Component\HttpFoundation\Request;
 
 class RegistrationController extends BaseController
 {
@@ -59,8 +59,8 @@ class RegistrationController extends BaseController
 			}
 		}
 
-		return $this->render('CoreBundle::Registration/index.html.twig', array(
+		return $this->render('CoreBundle::Registration/index.html.twig', [
 			'form' => $form->createView(),
-		));
+		]);
 	}
 }

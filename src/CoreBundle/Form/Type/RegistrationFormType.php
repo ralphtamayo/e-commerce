@@ -3,74 +3,73 @@
 namespace CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationFormType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('username', TextType::class, array(
+			->add('username', TextType::class, [
 				'required' => true,
-				'attr' => array(
+				'attr' => [
 					'placeholder' => 'Username',
-				),
-			))
-			->add('email', EmailType::class, array(
+				],
+			])
+			->add('email', EmailType::class, [
 				'required' => true,
-				'attr' => array(
+				'attr' => [
 					'placeholder' => 'E-mail Address',
-				),
-			))
-			->add('firstName', TextType::class, array(
+				],
+			])
+			->add('firstName', TextType::class, [
 				'required' => true,
-				'attr' => array(
+				'attr' => [
 					'placeholder' => 'First name',
-				),
-			))
-			->add('lastName', TextType::class, array(
+				],
+			])
+			->add('lastName', TextType::class, [
 				'required' => true,
-				'attr' => array(
+				'attr' => [
 					'placeholder' => 'Last name',
-				),
-			))
-			->add('address', TextAreaType::class, array(
+				],
+			])
+			->add('address', TextAreaType::class, [
 				'required' => true,
-				'attr' => array(
+				'attr' => [
 					'placeholder' => 'Address',
-				),
-			))
-			->add('contactDetails', TextType::class, array(
+				],
+			])
+			->add('contactDetails', TextType::class, [
 				'required' => true,
-				'attr' => array(
+				'attr' => [
 					'placeholder' => 'Contact Details',
-				),
-			))
-			->add('plainPassword', RepeatedType::class, array(
+				],
+			])
+			->add('plainPassword', RepeatedType::class, [
 				'type' => PasswordType::class,
 				'required' => true,
-				'first_options' => array(
+				'first_options' => [
 					'label' => 'Password',
-					'attr' => array(
+					'attr' => [
 						'placeholder' => 'Password',
 						'class' => 'form-input',
-					),
-				),
-				'second_options' => array(
+					],
+				],
+				'second_options' => [
 					'label' => 'Confirm password',
-					'attr' => array(
+					'attr' => [
 						'placeholder' => 'Confirm password',
 						'class' => 'form-input',
-					),
-				),
+					],
+				],
 				'invalid_message' => 'user.password.notMatch',
-			))
+			])
 		;
 	}
 

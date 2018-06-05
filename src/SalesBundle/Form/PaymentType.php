@@ -15,32 +15,32 @@ class PaymentType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('paymentMode', Type\ChoiceType::class, array(
-				'choices' => array(
+			->add('paymentMode', Type\ChoiceType::class, [
+				'choices' => [
 					Payment::PAYMENT_MODE_BDO => Payment::PAYMENT_MODE_BDO,
 					Payment::PAYMENT_MODE_CEBUANA => Payment::PAYMENT_MODE_CEBUANA,
 					Payment::PAYMENT_MODE_COD => Payment::PAYMENT_MODE_COD,
-				),
-			))
+				],
+			])
 			->add('cardNumber', Type\TextType::class)
 			->add('expirationDate', Type\DateType::class)
 			->add('referenceNumber', Type\TextType::class)
-			->add('address', TextAreaType::class, array(
+			->add('address', TextAreaType::class, [
 				'required' => true,
 				'disabled' => true,
-			))
-			->add('contactDetails', TextType::class, array(
+			])
+			->add('contactDetails', TextType::class, [
 				'required' => true,
 				'disabled' => true,
-			))
+			])
 		;
 	}
 
 	public function configureOptions(OptionsResolver $resolver)
 	{
-		$resolver->setDefaults(array(
-			'data_class' => 'SalesBundle\Entity\Payment'
-		));
+		$resolver->setDefaults([
+			'data_class' => 'SalesBundle\Entity\Payment',
+		]);
 	}
 
 	public function getBlockPrefix()

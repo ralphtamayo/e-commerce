@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Inventory
+ * Inventory.
  *
  * @ORM\Table(name="inventory_inventory")
  * @ORM\Entity(repositoryClass="InventoryBundle\Repository\InventoryRepository")
@@ -28,6 +28,7 @@ class Inventory
 
 	/**
 	 * One Inventory has One Product.
+	 *
 	 * @ORM\OneToOne(targetEntity="Product", inversedBy="inventory")
 	 */
 	private $product;

@@ -3,9 +3,9 @@
 namespace InventoryBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProductType extends AbstractType
 {
@@ -17,16 +17,18 @@ class ProductType extends AbstractType
 		$builder->add('name')
 				->add('description')
 				->add('price')
-				->add('image', FileType::class, array('label' => 'Image (png/jpg file)'))
+				->add('image', FileType::class, ['label' => 'Image (png/jpg file)'])
 		;
-	}/**
+	}
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public function configureOptions(OptionsResolver $resolver)
 	{
-		$resolver->setDefaults(array(
-			'data_class' => 'InventoryBundle\Entity\Product'
-		));
+		$resolver->setDefaults([
+			'data_class' => 'InventoryBundle\Entity\Product',
+		]);
 	}
 
 	/**
@@ -36,6 +38,4 @@ class ProductType extends AbstractType
 	{
 		return 'inventorybundle_product';
 	}
-
-
 }

@@ -3,18 +3,16 @@
 namespace SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\NoResultException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CartRepository extends EntityRepository
 {
 	public function load($id)
 	{
 		$qb = $this->createQueryBuilder('cart')
-			->select('cart', 'item','product')
+			->select('cart', 'item', 'product')
 			->join('cart.items', 'item')
 			->join('item.product', 'product')
-			->andWhere("cart.id = :id")
+			->andWhere('cart.id = :id')
 			->setParameter('id', $id)
 		;
 

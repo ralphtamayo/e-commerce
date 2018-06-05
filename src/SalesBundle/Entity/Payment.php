@@ -2,13 +2,12 @@
 
 namespace SalesBundle\Entity;
 
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * Payment
+ * Payment.
  *
  * @ORM\Table(name="sales_payment")
  * @ORM\Entity(repositoryClass="SalesBundle\Repository\PaymentRepository")
@@ -18,7 +17,7 @@ class Payment
 	const PAYMENT_MODE_BDO = 'BDO';
 	const PAYMENT_MODE_CEBUANA = 'Cebuana';
 	const PAYMENT_MODE_COD = 'Cash On Delivery (COD)';
-	
+
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -45,7 +44,7 @@ class Payment
 	 * @ORM\Column(name="referenceNumber", type="string", length=255, nullable=true)
 	 */
 	private $referenceNumber;
-	
+
 	/**
 	 * @ORM\OneToOne(targetEntity="Cart", inversedBy="payment")
 	 */
@@ -54,9 +53,9 @@ class Payment
 	/**
 	 * @ORM\Column(name="total", type="decimal", scale=2, precision=13)
 	 */
-   private $total;
+	private $total;
 
-   /**
+	/**
 	 * @ORM\Column(type="string", nullable=false)
 	 * @Assert\NotBlank(message="Address cannot be blank.")
 	 */
@@ -180,12 +179,12 @@ class Payment
 				->addViolation();
 		}
 
-		if ($this->getPaymentMode() === self::PAYMENT_MODE_BDO) {
-			$today = date("Y-m-d");
+		if (self::PAYMENT_MODE_BDO === $this->getPaymentMode()) {
+			$today = date('Y-m-d');
 			$expire = $this->getExpirationDate();
 
 			$today_dt = new \DateTime($today);
-			$expire_dt = new \DateTime($expire->format("Y-m-d"));
+			$expire_dt = new \DateTime($expire->format('Y-m-d'));
 
 			if ($expire_dt < $today_dt) {
 				$context->buildViolation('Expiration Date must be one day onwards')
@@ -193,21 +192,21 @@ class Payment
 					->addViolation();
 			}
 
-			if ($this->getCardNumber() === null) {
+			if (null === $this->getCardNumber()) {
 				$context->buildViolation('Card Number cannot be blank.')
 				->atPath('cardNumber')
 				->addViolation();
 			}
 
-			if ($this->getExpirationDate() === null) {
+			if (null === $this->getExpirationDate()) {
 				$context->buildViolation('Expiration Date cannot be blank.')
 				->atPath('expirationMonth')
 				->addViolation();
 			}
 		}
 
-		if ($this->getPaymentMode() === self::PAYMENT_MODE_CEBUANA) {
-			if ($this->getReferenceNumber() === null) {
+		if (self::PAYMENT_MODE_CEBUANA === $this->getPaymentMode()) {
+			if (null === $this->getReferenceNumber()) {
 				$context->buildViolation('Reference Number cannot be blank.')
 				->atPath('referenceNumber')
 				->addViolation();

@@ -6,10 +6,9 @@ use CoreBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Cart
+ * Cart.
  *
  * @ORM\Table(name="sales_cart")
  * @ORM\Entity(repositoryClass="SalesBundle\Repository\CartRepository")
@@ -85,7 +84,7 @@ class Cart
 	{
 		$this->items->removeElement($item);
 
-        return $this;
+		return $this;
 	}
 
 	public function setPayment(Payment $payment): self
