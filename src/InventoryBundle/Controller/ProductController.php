@@ -7,13 +7,13 @@ use InventoryBundle\Entity\Inventory;
 use InventoryBundle\Entity\Product;
 use InventoryBundle\Form\ProductType;
 use SalesBundle\Entity\CartItem;
+use SalesBundle\Form\CartItemType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
-use CoreBundle\Utils\GeneratingUtils;
 
 /**
  * Product controller.
@@ -31,10 +31,7 @@ class ProductController extends BaseController
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$cartItem = new CartItem();
-		$form = $this->createForm('SalesBundle\Form\CartItemType', $cartItem);
-
-		$products = $em->getRepository('InventoryBundle:Product')->findAll();
+		$products = $em->getRepository(Product::class)->findAll();
 
 		return [
 			'products' => $products,
@@ -76,7 +73,7 @@ class ProductController extends BaseController
 		$form = $this->createDeleteForm($product);
 
 		$cartItem = new CartItem();
-		$cartItemForm = $this->createForm('SalesBundle\Form\CartItemType', $cartItem);
+		$cartItemForm = $this->createForm(CartItemType::class, $cartItem);
 
 		return [
 			'product' => $product,
@@ -93,7 +90,7 @@ class ProductController extends BaseController
 	 */
 	public function editAction(Request $request, Product $product)
 	{
-		$deleteForm = $this->createDeleteForm($product);
+		$productModel = $this->getModel();
 
 		$product->setImage(
 			new File($this->getParameter('images_directory').'/'.$product->getImage())
@@ -101,26 +98,12 @@ class ProductController extends BaseController
 
 		$previousImage = $product->getImage()->getPathName();
 
-		$editForm = $this->createForm('InventoryBundle\Form\ProductType', $product);
-		$editForm->handleRequest($request);
+		$editForm = $this->processForm($product, ProductType::class);
 
 		if ($editForm->isSubmitted() && $editForm->isValid()) {
-			$file = $product->getImage();
+			$productModel->update($product, $editForm);
 
-			$fileName = GeneratingUtils::generateUniqueFileName().'.'.$file->guessExtension();
-
-			// moves the file to the directory where brochures are stored
-			$file->move(
-				$this->getParameter('images_directory'),
-				$fileName
-			);
-
-			// remove old image on uploads/images folder
 			unlink($previousImage);
-
-			$product->setImage($fileName);
-
-			$this->getDoctrine()->getManager()->flush();
 
 			return $this->redirectToRoute('product_show', ['id' => $product->getId()]);
 		}
@@ -128,42 +111,28 @@ class ProductController extends BaseController
 		return [
 			'product' => $product,
 			'edit_form' => $editForm->createView(),
-			'delete_form' => $deleteForm->createView(),
 		];
 	}
 
 	/**
-	 * @Security("has_role('ROLE_ADMIN')")
 	 * @Route("/{id}", name="product_delete")
 	 * @Method("DELETE")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function deleteAction(Request $request, Product $product)
 	{
 		$form = $this->createDeleteForm($product);
 		$form->handleRequest($request);
 
+		$productModel = $this->getModel();
+
 		if ($form->isSubmitted() && $form->isValid()) {
-			$em = $this->getDoctrine()->getManager();
-
-			// remove old image on uploads/images folder
-			unlink($this->getParameter('images_directory').'/'.$product->getImage());
-
-			$inventory = $product->getInventory();
-			$em->remove($inventory);
-			$em->remove($product);
-			$em->flush();
+			$productModel->delete($product);
 		}
 
 		return $this->redirectToRoute('product_index');
 	}
 
-	/**
-	 * Creates a form to delete a product entity.
-	 *
-	 * @param Product $product The product entity
-	 *
-	 * @return \Symfony\Component\Form\Form The form
-	 */
 	private function createDeleteForm(Product $product)
 	{
 		return $this->createFormBuilder()
